@@ -20,11 +20,16 @@ public class DoorObject : MonoBehaviour, IInteractable
     public bool OnInteraction(PlayerController player)
     {
         if (isBlocked)
+        {
+            Debug.Log("Door is blocked");
             return false;
+        }
         else if (isLocked)
         {
-            if(player.inventory.UseObject(objectToUnlock))
+            Debug.Log("Door is locked");
+            if (player.inventory.UseObject(objectToUnlock))
             {
+                Debug.Log("You unlocked the door");
                 isLocked = false;
                 OpenDoor(player);
                 return true;
@@ -70,12 +75,14 @@ public class DoorObject : MonoBehaviour, IInteractable
 
     private async void OpenDoor(PlayerController player)
     {
+        Debug.Log("Door is open");
         player.currentRoom.isPlayerInRoom = false;
         player.currentRoom = player.currentRoom.roomId == room1.roomId ? room2 : room1;
         player.currentRoom.isPlayerInRoom = true;
         //TODO: Animation + sound
         doorCollider.enabled = false;
         await Task.Delay(1000);
+        Debug.Log("Door closed");
         doorCollider.enabled = true;
     }
 }
