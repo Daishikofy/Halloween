@@ -26,7 +26,7 @@ public class DoorObject : MonoBehaviour, IInteractable
             if(player.inventory.UseObject(objectToUnlock))
             {
                 isLocked = false;
-                OpenDoor();
+                OpenDoor(player);
                 return true;
             }
             else
@@ -34,7 +34,7 @@ public class DoorObject : MonoBehaviour, IInteractable
                 return false;
             }
         }
-        OpenDoor();
+        OpenDoor(player);
         return true;
     }
 
@@ -68,8 +68,11 @@ public class DoorObject : MonoBehaviour, IInteractable
         blockingObject = null;
     }
 
-    private async void OpenDoor()
+    private async void OpenDoor(PlayerController player)
     {
+        player.currentRoom.isPlayerInRoom = false;
+        player.currentRoom = player.currentRoom.roomId == room1.roomId ? room2 : room1;
+        player.currentRoom.isPlayerInRoom = true;
         //TODO: Animation + sound
         doorCollider.enabled = false;
         await Task.Delay(1000);

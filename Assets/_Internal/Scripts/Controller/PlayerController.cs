@@ -24,6 +24,9 @@ public class PlayerController : MonoBehaviour {
     [SerializeField]
     private RelativeJoint2D joint = null;
 
+    [Header("Runtime variables")]
+    public RoomObject currentRoom;
+
     //Physics and movement
     private Rigidbody2D rb;
     private Vector2 playerMovement;
@@ -127,10 +130,9 @@ public class PlayerController : MonoBehaviour {
 
     private void Interact()
     {
-        Vector3 startPoint = transform.position + Vector3.up * 0.1f;
-        RaycastHit2D hit = Physics2D.Raycast(startPoint, playerDirection, 0.5f);
+        RaycastHit2D hit = Physics2D.Raycast(transform.position, playerDirection, 0.5f);
         Debug.Log("fraction: " + hit.fraction);
-        Debug.DrawRay(startPoint, playerDirection, Color.red, 0.5f);
+        Debug.DrawRay(transform.position, playerDirection, Color.red, 0.5f);
 
         if (hit.collider == null)
         {
@@ -159,6 +161,7 @@ public class PlayerController : MonoBehaviour {
     {
         var otherRb = other.GetComponent<Rigidbody2D>();
 
+        otherRb.bodyType = RigidbodyType2D.Dynamic;
         isDragingObject = true;
         rb.mass += otherRb.mass;
         joint.connectedBody = otherRb;
@@ -174,6 +177,7 @@ public class PlayerController : MonoBehaviour {
     {
         var otherRb = joint.connectedBody;
 
+        otherRb.bodyType = RigidbodyType2D.Kinematic;
         isDragingObject = false;
         rb.mass -= otherRb.mass;
         joint.connectedBody = null;
