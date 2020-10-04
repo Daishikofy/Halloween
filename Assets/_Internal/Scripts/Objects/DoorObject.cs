@@ -15,7 +15,12 @@ public class DoorObject : MonoBehaviour, IInteractable
 
     [Header("Run time variables")]
     public bool isBlocked;
-    public BlockingObject blockingObject;
+    public List<BlockingObject> blockingObjects;
+
+    private void Start()
+    {
+        blockingObjects = new List<BlockingObject>();
+    }
 
     public bool OnInteraction(PlayerController player)
     {
@@ -53,8 +58,9 @@ public class DoorObject : MonoBehaviour, IInteractable
         if (collision.CompareTag("BlockingObject"))
         {
             isBlocked = true;
-            blockingObject = collision.GetComponent<BlockingObject>();
+            var blockingObject = collision.GetComponent<BlockingObject>();
             blockingObject.destroyed.AddListener(RemoveBlockingObject);
+            blockingObjects.Add(blockingObject);
         }
     }
 
@@ -62,15 +68,28 @@ public class DoorObject : MonoBehaviour, IInteractable
     {
         if (collision.CompareTag("BlockingObject"))
         {
-            RemoveBlockingObject();
+            RemoveBlockingObject(collision.GetComponent<BlockingObject>());
         }
     }
 
-    private void RemoveBlockingObject()
+    private void RemoveBlockingObject(BlockingObject blockingObject)
     {
-        isBlocked = false;
-        blockingObject.destroyed.RemoveListener(RemoveBlockingObject);
-        blockingObject = null;
+        if(blockingObjects.Contains(blockingObject))
+        {
+            blockingObject.destroyed.RemoveListener(RemoveBlockingObject);
+            blockingObjects.Remove(blockingObject);
+        }
+        /*
+        foreach (var obj in blockingObjects)
+        {
+            if (obj.gameObject.GetInstanceID() == blockingObject.GetInstanceID())
+            {
+                obj.destroyed.RemoveListener(RemoveBlockingObject);
+                blockingObjects.Remove(obj);
+            }
+        }*/
+
+        isBlocked = blockingObjects.Count != 0;
     }
 
     private async void OpenDoor(PlayerController player)

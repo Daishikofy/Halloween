@@ -8,8 +8,14 @@ public class BlockingObject : MonoBehaviour, IDragable
     public int lifePoints;
 
     [HideInInspector]
-    public UnityEvent destroyed;
-    public bool OnDamaged()
+    public BlockingObjectEvent destroyed;
+
+    private void Awake()
+    {
+        destroyed = new BlockingObjectEvent();
+    }
+
+    public bool Damaged()
     {
         lifePoints--;
         if (lifePoints <= 0)
@@ -24,6 +30,7 @@ public class BlockingObject : MonoBehaviour, IDragable
     {
         //TODO: Destroy animation
         GetComponent<Collider>().enabled = false;
+        destroyed.Invoke(this);
     }
 
 }
