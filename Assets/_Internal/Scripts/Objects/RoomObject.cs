@@ -13,7 +13,7 @@ public enum RoomType
 
 public class RoomObject : MonoBehaviour
 {
-    public int roomId;
+    public int id;
     public DoorObject[] doors;
     public RoomType type;
     [Tooltip("Max value between which the camera can move when RoomType is Vertical or Horizontal")]

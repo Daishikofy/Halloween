@@ -7,8 +7,7 @@ using UnityEngine;
 public class DoorObject : MonoBehaviour, IInteractable
 {
     public Collider2D doorCollider;
-    public RoomObject room1;
-    public RoomObject room2;
+    public FrontDoorObject[] frontDoors;
 
     public bool isLocked;
     public string objectToUnlock;
@@ -20,6 +19,11 @@ public class DoorObject : MonoBehaviour, IInteractable
     private void Start()
     {
         blockingObjects = new List<BlockingObject>();
+        foreach (var frontDoor in frontDoors)
+        {
+            frontDoor.objectEnters.AddListener(AddBlockingObject);
+            frontDoor.objectExits.AddListener(RemoveBlockingObject);
+        }
     }
 
     public bool OnInteraction(PlayerController player)
@@ -53,23 +57,11 @@ public class DoorObject : MonoBehaviour, IInteractable
         return isBlocked;
     }
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    private void AddBlockingObject(BlockingObject blockingObject)
     {
-        if (collision.CompareTag("BlockingObject"))
-        {
-            isBlocked = true;
-            var blockingObject = collision.GetComponent<BlockingObject>();
-            blockingObject.destroyed.AddListener(RemoveBlockingObject);
-            blockingObjects.Add(blockingObject);
-        }
-    }
-
-    private void OnTriggerExit2D(Collider2D collision)
-    {
-        if (collision.CompareTag("BlockingObject"))
-        {
-            RemoveBlockingObject(collision.GetComponent<BlockingObject>());
-        }
+        isBlocked = true;
+        blockingObject.destroyed.AddListener(RemoveBlockingObject);
+        blockingObjects.Add(blockingObject);
     }
 
     private void RemoveBlockingObject(BlockingObject blockingObject)
@@ -79,15 +71,6 @@ public class DoorObject : MonoBehaviour, IInteractable
             blockingObject.destroyed.RemoveListener(RemoveBlockingObject);
             blockingObjects.Remove(blockingObject);
         }
-        /*
-        foreach (var obj in blockingObjects)
-        {
-            if (obj.gameObject.GetInstanceID() == blockingObject.GetInstanceID())
-            {
-                obj.destroyed.RemoveListener(RemoveBlockingObject);
-                blockingObjects.Remove(obj);
-            }
-        }*/
 
         isBlocked = blockingObjects.Count != 0;
     }
@@ -95,12 +78,12 @@ public class DoorObject : MonoBehaviour, IInteractable
     private async void OpenDoor(PlayerController player)
     {
         Debug.Log("Door is open");
-        player.currentRoom.isPlayerInRoom = false;
-        player.currentRoom = player.currentRoom.roomId == room1.roomId ? room2 : room1;
-        player.currentRoom.isPlayerInRoom = true;
+        int index = player.currentRoom.id == frontDoors[0].room.id ? 1 : 0;
+        GameController.Instance.PlayerChangesRoom(frontDoors[index].room, frontDoors[index].transform.position);
         //TODO: Animation + sound
+
         doorCollider.enabled = false;
-        await Task.Delay(1000);
+        await Task.Delay(3000);
         Debug.Log("Door closed");
         doorCollider.enabled = true;
     }

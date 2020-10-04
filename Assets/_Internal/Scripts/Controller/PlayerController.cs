@@ -2,14 +2,15 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 [Serializable]
 public enum PlayerMovement
 {
     Continuous,
-    Inverted,
     Horizontal,
-    Vertical
+    Vertical,
+    Automatic
 }
 
 public class PlayerController : MonoBehaviour {
@@ -32,6 +33,9 @@ public class PlayerController : MonoBehaviour {
     private Vector2 playerMovement;
     private Vector2 playerDirection;
     private Action currentMovement;
+
+    private Vector2 targetPoint;
+    private float lastDistance;
 
     private Boolean isDragingObject;
 
@@ -60,8 +64,7 @@ public class PlayerController : MonoBehaviour {
 	}
     private void FixedUpdate()
     {
-        playerMovement *= (speed / rb.mass);
-        rb.MovePosition(rb.position + playerMovement * Time.deltaTime);
+        rb.MovePosition(rb.position + (playerMovement * (speed / rb.mass)) * Time.deltaTime);
     }
 
     #region "MOVEMENTS"
@@ -70,15 +73,6 @@ public class PlayerController : MonoBehaviour {
     {
         playerMovement.x = Input.GetAxisRaw("Horizontal");
         playerMovement.y = Input.GetAxisRaw("Vertical");
-        if (playerMovement.x > 0 && playerMovement.y > 0)
-            playerMovement.y = 0;
-        SetDirection(playerMovement);
-    }
-
-    private void InvertedMovement()
-    {
-        playerMovement.x = -Input.GetAxisRaw("Horizontal");
-        playerMovement.y = -Input.GetAxisRaw("Vertical");
         if (playerMovement.x > 0 && playerMovement.y > 0)
             playerMovement.y = 0;
         SetDirection(playerMovement);
@@ -97,6 +91,17 @@ public class PlayerController : MonoBehaviour {
         SetDirection(playerMovement);
     }
 
+    private void AutomaticMovement()
+    {
+        var distance = Vector2.Distance(transform.position, targetPoint);
+        if (lastDistance < distance)
+        {
+            playerMovement = Vector2.zero;
+            SetMovement(PlayerMovement.Continuous);
+        }
+        lastDistance = distance;
+    }
+
     private void SetDirection(Vector2 direction)
     {
         if (direction == playerDirection || direction.x + direction.y == 0)
@@ -106,13 +111,14 @@ public class PlayerController : MonoBehaviour {
 
     private void SetMovement(PlayerMovement movement)
     {
+        playerMovimentation = movement;
         switch (movement)
         {
             case PlayerMovement.Continuous:
                 currentMovement = () => ContinuousMovement();
                 break;
-            case PlayerMovement.Inverted:
-                currentMovement = () => InvertedMovement();
+            case PlayerMovement.Automatic:
+                currentMovement = () => AutomaticMovement();
                 break;
             case PlayerMovement.Horizontal:
                 currentMovement = () => HorizontalMovement();
@@ -123,6 +129,28 @@ public class PlayerController : MonoBehaviour {
             default:
                 break;
         }
+    }
+
+    public void GoTo(Vector2 destination)
+    {
+        targetPoint = destination; 
+
+        float deltaX = math.abs(rb.position.x - destination.x);
+        float deltaY = math.abs(rb.position.y - destination.y);
+
+        Vector2 startPoint = rb.position;
+        if (deltaX > deltaY)
+            startPoint.y = destination.y;
+        else
+            startPoint.x = destination.x;
+
+        transform.position = startPoint;
+
+        playerMovement = (destination - startPoint).normalized;
+        lastDistance = Vector2.Distance(transform.position, targetPoint);
+
+        SetDirection(playerMovement);
+        SetMovement(PlayerMovement.Automatic);
     }
 
     // MOVEMENTS END
