@@ -14,9 +14,6 @@ public enum PlayerMovement
 }
 
 public class PlayerController : MonoBehaviour {
-
-
-
     [Header("Physics setup")]
     [SerializeField]
     private float speed = 1;

@@ -9,6 +9,7 @@ public class GameController : MonoBehaviour
     public static GameController Instance { get { return instance; } }
 
     public PlayerController player;
+    public CameraController camera;
     public MonsterController[] monsters;
 
     public RoomObject[] rooms;
@@ -33,6 +34,12 @@ public class GameController : MonoBehaviour
         player.currentRoom = newRoom; 
         player.currentRoom.isPlayerInRoom = true;
         player.GoTo(frontDoorPosition);
+        CameraMovement movement;
+        if (newRoom.type == RoomType.HorizontalRoom)
+            movement = CameraMovement.Horizontal;
+        else
+            movement = CameraMovement.Vertical;
+        camera.GoTo(movement, newRoom.cameraMin.position, newRoom.cameraMax.position);
     }
 
     public void MonsterChangesRoom(RoomObject newRoom)
