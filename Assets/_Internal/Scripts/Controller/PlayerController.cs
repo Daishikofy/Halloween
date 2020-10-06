@@ -71,7 +71,7 @@ public class PlayerController : MonoBehaviour {
     {
         playerMovement.x = Input.GetAxisRaw("Horizontal");
         playerMovement.y = Input.GetAxisRaw("Vertical");
-        if (playerMovement.x > 0 && playerMovement.y > 0)
+        if (playerMovement.x != 0 && playerMovement.y != 0)
             playerMovement.y = 0;
         SetDirection(playerMovement);
     }
