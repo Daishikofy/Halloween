@@ -3,6 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[Serializable]
+public enum MonsterState
+{
+    Traped,
+    Blocked,
+    Patroling,
+    BackToPatrol,
+    Chasing,
+    Eating
+}
+
 public class MonsterController : MonoBehaviour
 {
     public RoomObject[] patrolPath;
