@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class FrontDoorObject : MonoBehaviour
@@ -30,5 +31,11 @@ public class FrontDoorObject : MonoBehaviour
         {
             objectExits.Invoke(collision.GetComponent<BlockingObject>());
         }
+    }
+
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(0.1f, 1, 0.4f, 0.5f);
+        Gizmos.DrawCube(transform.position, transform.localScale);
     }
 }

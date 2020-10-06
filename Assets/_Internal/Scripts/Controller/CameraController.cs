@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using Unity.Mathematics;
 using UnityEngine;
 
@@ -84,7 +85,7 @@ public class CameraController : MonoBehaviour
         }
     }
 
-    public void GoTo(CameraMovement movimentation, Vector2 min, Vector2 max)
+    public async void GoTo(CameraMovement movimentation, Vector2 min, Vector2 max)
     {
         targetPoint = Utils.NearestPointOnSegment(transform.position, min, max);        
 
@@ -94,6 +95,9 @@ public class CameraController : MonoBehaviour
         cameraMovement = (targetPoint - startPoint).normalized;
         distance = Vector2.Distance(transform.position, targetPoint);
 
-        transform.LeanMove(targetPoint, (distance / transitionSpeed));
+        float time = distance / transitionSpeed;
+        transform.LeanMove(targetPoint, time);
+        await Task.Delay((int)time*1000);
+        SetMovement(cameraMovimentation);
     }
 }

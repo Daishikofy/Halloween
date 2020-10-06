@@ -24,6 +24,7 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Runtime variables")]
     public RoomObject currentRoom;
+    public bool automaticMovement;
 
     //Physics and movement
     private Rigidbody2D rb;
@@ -94,6 +95,7 @@ public class PlayerController : MonoBehaviour {
         if (lastDistance < distance)
         {
             playerMovement = Vector2.zero;
+            automaticMovement = false;
             SetMovement(PlayerMovement.Continuous);
         }
         lastDistance = distance;
@@ -147,6 +149,7 @@ public class PlayerController : MonoBehaviour {
         lastDistance = Vector2.Distance(transform.position, targetPoint);
 
         SetDirection(playerMovement);
+        automaticMovement = true;
         SetMovement(PlayerMovement.Automatic);
     }
 

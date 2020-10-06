@@ -83,8 +83,16 @@ public class DoorObject : MonoBehaviour, IInteractable
         //TODO: Animation + sound
 
         doorCollider.enabled = false;
-        await Task.Delay(3000);
+
+        do { await Task.Delay(100); } 
+        while (player.automaticMovement);
+
         Debug.Log("Door closed");
         doorCollider.enabled = true;
+    }
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = new Color(0.5f, 0, 0.4f, 0.5f);
+        Gizmos.DrawCube(transform.position, doorCollider.bounds.size);
     }
 }
