@@ -127,7 +127,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 601509754021146080}
   m_PrefabAsset: {fileID: 0}
---- !u!19719996 &104277145
+--- !u!19719996 &104277148
 TilemapCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -266,7 +266,7 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1725643663}
   m_PrefabAsset: {fileID: 0}
---- !u!19719996 &1167718716
+--- !u!19719996 &1167718719
 TilemapCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -294,6 +294,7 @@ GameObject:
   - component: {fileID: 1347623226}
   - component: {fileID: 1347623225}
   - component: {fileID: 1347623228}
+  - component: {fileID: 1347623229}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -319,7 +320,7 @@ Camera:
   m_Enabled: 1
   serializedVersion: 2
   m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
+  m_BackGroundColor: {r: 0.121568635, g: 0.09019608, b: 0.21960786, a: 0}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
   m_FOVAxisMode: 0
@@ -328,15 +329,15 @@ Camera:
   m_FocalLength: 50
   m_NormalizedViewPortRect:
     serializedVersion: 2
-    x: 0
+    x: 0.0091883615
     y: 0
-    width: 1
-    height: 1
+    width: 0.9800919
+    height: 0.99999994
   near clip plane: 0.3
   far clip plane: 1000
   field of view: 60
   orthographic: 1
-  orthographic size: 5
+  orthographic size: 3.828125
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -383,6 +384,26 @@ MonoBehaviour:
   playerPosition: {fileID: 2069705708}
   minPosition: -2
   maxPosition: 2
+--- !u!114 &1347623229
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1347623224}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6a160d838ff8b4b4693ac20007e008c7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AssetsPPU: 32
+  m_RefResolutionX: 320
+  m_RefResolutionY: 180
+  m_UpscaleRT: 0
+  m_PixelSnapping: 1
+  m_CropFrameX: 1
+  m_CropFrameY: 0
+  m_StretchFill: 0
 --- !u!4 &1388655721 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6982179416714509018, guid: e4276dbd1926eef42ae6d3e1815bbe2e,
