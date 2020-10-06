@@ -9,8 +9,7 @@ public enum CameraMovement
 {
     Fixed,
     Horizontal,
-    Vertical,
-    Automatic
+    Vertical
 }
 
 public class CameraController : MonoBehaviour
@@ -25,13 +24,20 @@ public class CameraController : MonoBehaviour
 
     private Vector3 cameraMovement;
     private Vector2 targetPoint;
-    private float lastDistance;
+    private float distance;
     private Action currentMovement;
     // Start is called before the first frame update
     void Start()
     {
         cameraMovement = transform.position;
         SetMovement(cameraMovimentation);
+    }
+
+    public void Setup(CameraMovement movement, Vector2 min, Vector2 max)
+    {
+        cameraMovimentation = movement;
+        var aux = Utils.NearestPointOnSegment(transform.position, min, max);
+        transform.position = new Vector3(aux.x, aux.y, -10);
     }
 
     // Update is called once per frame
@@ -43,16 +49,6 @@ public class CameraController : MonoBehaviour
     private void FixedMovement()
     {
         return;
-    }
-    private void AutomaticMovement()
-    {
-        var distance = Vector2.Distance(transform.position, targetPoint);
-        if (lastDistance < distance)
-        {
-            cameraMovement = Vector2.zero;
-            SetMovement(cameraMovimentation);
-        }
-        lastDistance = distance;
     }
     private void HorizontalMovement()
     {
@@ -77,9 +73,6 @@ public class CameraController : MonoBehaviour
             case CameraMovement.Fixed:
                 currentMovement = () => FixedMovement();
                 break;
-            case CameraMovement.Automatic:
-                currentMovement = () => AutomaticMovement();
-                break;
             case CameraMovement.Horizontal:
                 currentMovement = () => HorizontalMovement();
                 break;
@@ -93,51 +86,14 @@ public class CameraController : MonoBehaviour
 
     public void GoTo(CameraMovement movimentation, Vector2 min, Vector2 max)
     {
-        //Get heading
-        Vector2 heading = (max - min);
-        float magnitudeMax = heading.magnitude;
-        heading.Normalize();
-
-        //Do projection from the point but clamp it
-        Vector2 lhs = (Vector2)transform.position - min;
-        float dotP = Vector2.Dot(lhs, heading);
-        dotP = Mathf.Clamp(dotP, 0f, magnitudeMax);
-
-        targetPoint = min + heading * dotP;        
+        targetPoint = Utils.NearestPointOnSegment(transform.position, min, max);        
 
         cameraMovimentation = movimentation;
-        if (cameraMovimentation == CameraMovement.Horizontal)
-        {
-            minPosition = min.x;
-            maxPosition = max.x;
-        }
-        else
-        {
-            minPosition = min.y;
-            maxPosition = max.y;
-        }
-        if (minPosition > maxPosition)
-        {
-            var aux = minPosition;
-            minPosition = maxPosition;
-            maxPosition = minPosition;
-        }
-        /*
-        float deltaX = math.abs(transform.position.x - targetPoint.x);
-        float deltaY = math.abs(transform.position.y - targetPoint.y);
-        */
         Vector2 startPoint = transform.position;
-        /*if (deltaX > deltaY)
-            startPoint.y = targetPoint.y;
-        else
-            startPoint.x = targetPoint.x;
-
-        transform.position = startPoint;*/
 
         cameraMovement = (targetPoint - startPoint).normalized;
-        lastDistance = Vector2.Distance(transform.position, targetPoint);
+        distance = Vector2.Distance(transform.position, targetPoint);
 
-        //SetMovement(CameraMovement.Automatic);
-        transform.LeanMove(targetPoint, (lastDistance / transitionSpeed));
+        transform.LeanMove(targetPoint, (distance / transitionSpeed));
     }
 }

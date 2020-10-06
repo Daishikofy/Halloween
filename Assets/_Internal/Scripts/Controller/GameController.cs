@@ -27,6 +27,21 @@ public class GameController : MonoBehaviour
         }
     }
 
+    private void Start()
+    {
+        foreach (var room in rooms)
+        {
+            if (player.currentRoom.id == room.id)
+            {
+                room.isPlayerInRoom = true;
+                break;
+            }
+        }
+        var currentRoom = player.currentRoom;
+        camera.Setup(currentRoom.type
+            , currentRoom.cameraMin.position
+            , currentRoom.cameraMax.position);
+    }
 
     public void PlayerChangesRoom(RoomObject newRoom, Vector2 frontDoorPosition)
     {
@@ -34,12 +49,8 @@ public class GameController : MonoBehaviour
         player.currentRoom = newRoom; 
         player.currentRoom.isPlayerInRoom = true;
         player.GoTo(frontDoorPosition);
-        CameraMovement movement;
-        if (newRoom.type == RoomType.HorizontalRoom)
-            movement = CameraMovement.Horizontal;
-        else
-            movement = CameraMovement.Vertical;
-        camera.GoTo(movement, newRoom.cameraMin.position, newRoom.cameraMax.position);
+
+        camera.GoTo(newRoom.type, newRoom.cameraMin.position, newRoom.cameraMax.position);
     }
 
     public void MonsterChangesRoom(RoomObject newRoom)
