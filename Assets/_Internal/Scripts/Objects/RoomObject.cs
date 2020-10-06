@@ -38,9 +38,14 @@ public class RoomObject : MonoBehaviour
         }
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool isAdjacent(int roomId)
     {
-        
+        foreach (var door in doors)
+        {
+            int index = door.frontDoors[0].room.id == id ? 1 : 0;
+            if (door.frontDoors[index].room.id == roomId)
+                return true;
+        }
+        return false;
     }
 }
