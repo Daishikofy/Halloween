@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
     private static GameController instance;
     public static GameController Instance { get { return instance; } }
 
+    public GameUIController ui;
     public PlayerController player;
     public CameraController camera;
     public MonsterController[] monsters;
@@ -29,6 +31,8 @@ public class GameController : MonoBehaviour
         {
             monsters[i].id = i;
         }
+
+        ui.onRestart.AddListener(RestartGame);
     }
 
     private void Start()
@@ -68,5 +72,20 @@ public class GameController : MonoBehaviour
     public void MonsterFollowsPlayer(int monsterId)
     {
         monsters[monsterId].GoToRoom(player.currentRoom.id);
+    }
+
+    public void OnPlayerWin()
+    {
+        ui.OnGameEnded(true);
+    }
+
+    public void OnPlayerLose()
+    {
+        ui.OnGameEnded(false);
+    }
+
+    private void RestartGame()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 }

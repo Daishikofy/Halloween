@@ -2,17 +2,16 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour
+public class NewBehaviourScript : MonoBehaviour, IInteractable
 {
-    // Start is called before the first frame update
-    void Start()
+    public bool OnInteraction(PlayerController player)
     {
-        
+        GameController.Instance.OnPlayerWin();
+        return true;
     }
 
-    // Update is called once per frame
-    void Update()
+    public bool OnInteraction(MonsterController monster)
     {
-        
+        return false;
     }
 }
