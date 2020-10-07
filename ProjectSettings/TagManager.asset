@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - BlockingObject
+  - Monster
   layers:
   - Default
   - TransparentFX

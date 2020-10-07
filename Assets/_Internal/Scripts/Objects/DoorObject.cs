@@ -16,6 +16,8 @@ public class DoorObject : MonoBehaviour, IInteractable
     public bool isBlocked;
     public List<BlockingObject> blockingObjects;
 
+    private int doorUsers = 0;
+
     private void Start()
     {
         blockingObjects = new List<BlockingObject>();
@@ -54,7 +56,10 @@ public class DoorObject : MonoBehaviour, IInteractable
 
     public bool OnInteraction(MonsterController monster)
     {
-        return isBlocked;
+        if (isBlocked)
+            return false;
+        OpenDoor(monster);
+        return true;
     }
 
     private void AddBlockingObject(BlockingObject blockingObject)
@@ -66,6 +71,7 @@ public class DoorObject : MonoBehaviour, IInteractable
 
     private void RemoveBlockingObject(BlockingObject blockingObject)
     {
+        Debug.Log("Remove blocking object");
         if(blockingObjects.Contains(blockingObject))
         {
             blockingObject.destroyed.RemoveListener(RemoveBlockingObject);
@@ -77,18 +83,52 @@ public class DoorObject : MonoBehaviour, IInteractable
 
     private async void OpenDoor(PlayerController player)
     {
-        Debug.Log("Door is open");
+        //Debug.Log("Player : Door is open");
         int index = player.currentRoom.id == frontDoors[0].room.id ? 1 : 0;
         GameController.Instance.PlayerChangesRoom(frontDoors[index].room, frontDoors[index].transform.position);
         //TODO: Animation + sound
-
         doorCollider.enabled = false;
-
-        do { await Task.Delay(100); } 
+        doorUsers += 1;
+        do {
+            await Task.Delay(100); 
+        } 
         while (player.automaticMovement);
 
-        Debug.Log("Door closed");
+        //Debug.Log("Player : Door closed");
+        if(doorUsers == 1)
+        {
+            doorUsers--;
+            doorCollider.enabled = true;
+        }
+    }
+
+    private async void OpenDoor(MonsterController monster)
+    {
+        int index = monster.currentRoom.id == frontDoors[0].room.id ? 1 : 0;
+        GameController.Instance.MonsterChangesRoom(monster.id,frontDoors[index].room, frontDoors[index].transform.position);
+        //TODO: Animation + sound
+        doorUsers += 1;
+        doorCollider.enabled = false;
+        //Debug.Log("Monster : Door open");
+        do {
+            await Task.Delay(100); 
+        }
+        while (monster.state == MonsterState.ChangingRoom);
+
+        //.Log("Monster : Door closed");
         doorCollider.enabled = true;
+        doorUsers--;
+        if (doorUsers == 0)  
+            doorCollider.enabled = true;
+        
+    }
+    public bool IsAdjacent(int roomId)
+    {
+        if (roomId == frontDoors[0].room.id)
+            return true;
+        if (roomId == frontDoors[1].room.id)
+                return true;
+        return false;
     }
     private void OnDrawGizmosSelected()
     {

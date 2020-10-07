@@ -25,6 +25,10 @@ public class GameController : MonoBehaviour
         {
             rooms[i].id = i;
         }
+        for (int i = 0; i < monsters.Length; i++)
+        {
+            monsters[i].id = i;
+        }
     }
 
     private void Start()
@@ -53,8 +57,16 @@ public class GameController : MonoBehaviour
         camera.GoTo(newRoom.type, newRoom.cameraMin.position, newRoom.cameraMax.position);
     }
 
-    public void MonsterChangesRoom(RoomObject newRoom)
+    public void MonsterChangesRoom(int monsterId, RoomObject newRoom, Vector2 frontDoorPosition)
     {
+        monsters[monsterId].currentRoom.isMonsterInRoom = true;
+        monsters[monsterId].currentRoom = newRoom;
+        monsters[monsterId].currentRoom.isMonsterInRoom = true;
+        monsters[monsterId].SetTargetPoint(frontDoorPosition);
+    }
 
+    public void MonsterFollowsPlayer(int monsterId)
+    {
+        monsters[monsterId].GoToRoom(player.currentRoom.id);
     }
 }

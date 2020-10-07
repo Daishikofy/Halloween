@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class BlockingObject : MonoBehaviour, IDragable
 {
     public int lifePoints;
-
+    public Collider2D collider;
     [HideInInspector]
     public BlockingObjectEvent destroyed;
 
@@ -29,8 +29,13 @@ public class BlockingObject : MonoBehaviour, IDragable
     public void DestroyObject()
     {
         //TODO: Destroy animation
-        GetComponent<Collider>().enabled = false;
+        collider.enabled = false;
         destroyed.Invoke(this);
     }
 
+    private void OnDrawGizmosSelected()
+    {
+        Gizmos.color = Color.red;
+        Gizmos.DrawSphere(transform.position, (float)lifePoints / 10);
+    }
 }
