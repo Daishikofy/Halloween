@@ -42,10 +42,28 @@ public class RoomObject : MonoBehaviour
     {
         foreach (var door in doors)
         {
-            int index = door.frontDoors[0].room.id == id ? 1 : 0;
+            int index = door.frontDoors[0].room.id == roomId ? 0 : 1;
             if (door.frontDoors[index].room.id == roomId)
                 return true;
         }
         return false;
+    }
+    /// <summary>
+    ///Returns the door to the adjacent room with the corresponding RoomId 
+    ///Returns NULL if none is found
+    /// </summary>
+    /// <param name="roomId">Id of the room you want to obtain</param>
+    /// <returns></returns>
+    public DoorObject GetDoorToAdjacentRoom(int roomId)
+    {
+        foreach (var door in doors)
+        {
+            int index = door.frontDoors[0].room.id == roomId ? 0 : 1;
+            if (door.frontDoors[index].room.id == roomId)
+            {
+                return door;
+            }
+        }
+        return null;
     }
 }

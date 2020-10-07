@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Runtime.InteropServices;
+using System.Threading.Tasks;
 using UnityEngine;
 
 [Serializable]
@@ -8,7 +10,10 @@ public enum MonsterState
 {
     Traped,
     Blocked,
-    Patroling,
+    GoingToDoor,
+    ChangingRoom,
+    CheckingRoom,
+    Patroling,    
     BackToPatrol,
     Chasing,
     Eating
@@ -22,11 +27,15 @@ public class MonsterController : MonoBehaviour
     public float chaseSpeed = 2;
     public float agility = 1;
     [Space]
-    public float breakTime;
-    public float patrolCycleTime;
+    public float breakTime = 1;
+    public float patrolCycleRate = 10;
+    public float attackRate = 5;
+    public float timeBeforeSpotted = 1;
 
     [Header("Object Setup")]
+    public int id;
     public Rigidbody2D rb;
+    public Collider2D monsterCollider;
     public PlayerController player;
     public RoomObject currentRoom;
 
@@ -34,11 +43,16 @@ public class MonsterController : MonoBehaviour
     public MonsterState state;
     public bool isChasingPlayer;
 
+    private int currentPatrolRoomIndex;
     private Action currentMovement;
+    private Queue<MonsterState> nextState;
     private Vector2 monsterMovement;
     private Vector2 monsterDirection;
     private float currentSpeed;
     private Vector2 targetPoint;
+
+    private DoorObject targetDoor;
+    private BlockingObject targetObject;
 
     private float breakTimeEnd;
     private float patrolCycleEnd;
@@ -46,7 +60,10 @@ public class MonsterController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        SetMovement(state);
+        nextState = new Queue<MonsterState>();
+        targetPoint = currentRoom.cameraMax.position;
+        patrolCycleEnd = Time.time + patrolCycleRate;
+        SetState(state);
     }
 
     // Update is called once per frame
@@ -60,76 +77,79 @@ public class MonsterController : MonoBehaviour
         rb.MovePosition(rb.position + (monsterMovement * currentSpeed) * Time.deltaTime);
     }
 
-    private void SetMovement(MonsterState movement)
+    private void SetState(MonsterState newState)
     {
-        switch (movement)
+        Debug.Log("State : " + newState);
+        switch (newState)
         {
             case MonsterState.Traped:
                 break;
+
             case MonsterState.Blocked:
+                state = newState;
+                currentSpeed = 0;
+                GoToNextRoom();
                 break;
-            case MonsterState.Patroling:
-                currentSpeed = normalSpeed;
-                currentMovement = () => Patroling();
-                break;
-            case MonsterState.BackToPatrol:
-                break;
-            case MonsterState.Chasing:
-                currentSpeed = chaseSpeed;
-                currentMovement = () => ChasePlayer();
-                break;
+
             case MonsterState.Eating:
                 break;
+
+
+            case MonsterState.Chasing:
+                currentSpeed = chaseSpeed;
+                state = newState;
+                currentMovement = () => ChasePlayer();
+                break;
+
+            case MonsterState.GoingToDoor:
+
+                if (currentSpeed < normalSpeed)
+                    currentSpeed = normalSpeed;
+                
+                if (targetDoor != null)
+                {
+                    targetPoint = targetDoor.frontDoors[0].room.id == currentRoom.id ?
+                        targetDoor.frontDoors[0].transform.position :
+                        targetDoor.frontDoors[1].transform.position;
+                    
+                    nextState.Enqueue(MonsterState.Blocked);
+                    nextState.Enqueue(MonsterState.CheckingRoom);
+                    nextState.Enqueue(state);
+                    state = newState;
+                    SetTargetPoint(targetPoint);
+                    SetDirection(monsterMovement);
+                    
+                    currentMovement = () => WalkToTarget();
+                }
+                else 
+                {
+                    currentMovement = () => Patroling();
+                }
+                break;
+
+            case MonsterState.ChangingRoom:
+                state = newState;
+                currentSpeed = normalSpeed;
+                break;
+
+            case MonsterState.CheckingRoom:
+                state = newState;
+                currentSpeed = 0;
+                CheckCurrentRoom();
+                break;
+            case MonsterState.Patroling:
+                state = newState;
+                currentSpeed = normalSpeed;
+                patrolCycleEnd = Time.time + patrolCycleRate;
+                currentMovement = () => Patroling();
+                
+                break;
+
+            case MonsterState.BackToPatrol:
+                break;
+
             default:
                 break;
-        }
-    }
-
-        public void TryNextPatrolRoom()
-    {
-        //If heading back to patrol, next made up room
-        //else next patrol room
-    }
-
-    public void AttackDoor(DoorObject door)
-    {
-        //Animation, sound
-        BlockingObject blockingObject = null;
-        float minDistance = 1000;
-        foreach (var blocking in door.blockingObjects)
-        {
-            float distance = Vector3.Distance(blocking.transform.position, this.transform.position);
-            if (Vector3.Distance(blocking.transform.position, this.transform.position) < minDistance)
-                blockingObject = blocking;
-        }
-        blockingObject.Damaged();
-    }
-
-    public void ChasePlayer()
-    {
-        if (Vector2.Distance(transform.position, targetPoint) < 0.1f)
-            targetPoint = NewTargetPlayerPoint();
-        monsterMovement = targetPoint - (Vector2)transform.position;
-
-        monsterMovement = monsterMovement.normalized;
-        SetDirection(monsterMovement);
-    }
-
-    public void Patroling()
-    {
-        if (Time.time < breakTimeEnd)
-            return;
-
-        monsterMovement = targetPoint - (Vector2)transform.position;
-
-        monsterMovement = monsterMovement.normalized;
-        SetDirection(monsterMovement);
-
-        if (Vector2.Distance(transform.position, targetPoint) < 0.1f)
-        {
-            targetPoint = NewRandomTargetPoint();
-            breakTimeEnd = Time.time + breakTime;
-            monsterMovement = Vector2.zero;
         }
     }
 
@@ -139,6 +159,127 @@ public class MonsterController : MonoBehaviour
             return;
         monsterDirection = direction;
     }
+
+    public async void CheckCurrentRoom()
+    {
+        MonsterState next = MonsterState.Patroling;
+        if (nextState.Count != 0)
+             next = nextState.Dequeue();
+        await Task.Delay((int)(timeBeforeSpotted * 1000));
+        if (currentRoom.isPlayerInRoom && next != MonsterState.Chasing)
+            SetState(MonsterState.Chasing);
+        else if (!currentRoom.isPlayerInRoom && next == MonsterState.Chasing)
+            SetState(MonsterState.Patroling);
+        else
+            SetState(next);
+        Debug.Log("CheckCurrentRoom: " + state);
+    }
+
+    public async void GoToNextRoom()
+    {
+        while (targetDoor.blockingObjects.Count > 0)
+        {
+            float minDist = Vector2.Distance(transform.position, targetPoint);
+            targetObject = null;
+            foreach (var blocking in targetDoor.blockingObjects)
+            {
+                if (Math.Abs(Vector2.Distance(transform.position, blocking.transform.position) - minDist) < 1)
+                {
+                    targetObject = blocking;
+                    targetPoint = (transform.position - blocking.transform.position).normalized * 0.5f;
+                }
+                else if (targetObject == null)
+                {
+                    targetObject = targetDoor.blockingObjects[0];
+                    targetPoint = targetDoor.frontDoors[0].room.id == currentRoom.id ?
+                        targetDoor.frontDoors[0].transform.position :
+                        targetDoor.frontDoors[1].transform.position;
+                }
+            }
+
+            await DestroyTargetObject();
+        }
+
+        if (targetDoor.OnInteraction(this))
+        {
+            SetState(MonsterState.ChangingRoom);  
+        }
+    }
+
+    public void ChasePlayer()
+    {
+        if (player.currentRoom.id != currentRoom.id)
+        {
+            GameController.Instance.MonsterFollowsPlayer(id);
+        }
+        if (Vector2.Distance(transform.position, targetPoint) < 0.1f)
+            targetPoint = NewTargetPlayerPoint();
+        monsterMovement = targetPoint - (Vector2)transform.position;
+
+        monsterMovement = monsterMovement.normalized;
+        SetDirection(monsterMovement);
+    }
+
+    public void GoToRoom(int roomId)
+    {
+        targetDoor = currentRoom.GetDoorToAdjacentRoom(roomId);
+        Debug.LogError("Target door to room " + roomId + " is: " + targetDoor.name);
+        SetState(MonsterState.GoingToDoor);
+    }
+
+    public void Patroling()
+    {
+        if (Time.time > patrolCycleEnd)
+        {
+            currentPatrolRoomIndex = (currentPatrolRoomIndex + 1) % patrolPath.Length;
+
+            targetDoor = currentRoom.GetDoorToAdjacentRoom(patrolPath[currentPatrolRoomIndex].id);
+            SetState(MonsterState.GoingToDoor);
+        }
+        if (Time.time < breakTimeEnd)
+            return;
+
+        if (Vector2.Distance(transform.position, targetPoint) < 0.1f)
+        {
+            targetPoint = NewRandomTargetPoint();
+            breakTimeEnd = Time.time + breakTime;
+            monsterMovement = Vector2.zero;
+        }
+        else
+        {
+            monsterMovement = targetPoint - (Vector2)transform.position;
+
+            monsterMovement = monsterMovement.normalized;
+            SetDirection(monsterMovement);
+        }
+    }
+
+    private async Task DestroyTargetObject()
+    {
+        while (targetObject.lifePoints > 0)
+        {
+            await Task.Delay((int)(attackRate * 1000));
+            targetObject.Damaged();
+        }
+    }
+
+    public void SetTargetPoint(Vector2 point)
+    {
+        targetPoint = point;
+
+        monsterMovement = targetPoint - (Vector2)transform.position;
+        monsterMovement = monsterMovement.normalized;
+    }
+    public void WalkToTarget()
+    {
+        if (monsterMovement != Vector2.zero && Vector2.Distance(transform.position, targetPoint) < 0.1f)
+        {
+            monsterMovement = Vector2.zero;
+            SetState(nextState.Dequeue());
+            Debug.Log("Walk to target: ");
+        }
+    }
+
     private Vector2 NewTargetPlayerPoint()
     {
         var targetDistance = 1 / agility;
@@ -154,22 +295,45 @@ public class MonsterController : MonoBehaviour
         float value = UnityEngine.Random.Range(-1,2);
         if (currentRoom.type == CameraMovement.Horizontal)
         {
-            target.y = value;
+            target.y = currentRoom.cameraMin.transform.position.y + value;
             target.x = UnityEngine.Random.Range(currentRoom.cameraMin.transform.position.x
                 , currentRoom.cameraMax.transform.position.x);
         }
         else if (currentRoom.type == CameraMovement.Vertical)
         {
-            target.x = value;
+            target.x = currentRoom.cameraMin.transform.position.x + value;
             target.y = UnityEngine.Random.Range(currentRoom.cameraMin.transform.position.y
                 , currentRoom.cameraMax.transform.position.y);
         }
         else
         {
-            target.x = value;
-            target.y = UnityEngine.Random.Range(-1, 2);
+            target.x = currentRoom.cameraMin.transform.position.x + value;
+            target.y = currentRoom.cameraMin.transform.position .y + UnityEngine.Random.Range(-1, 2);
         }
         return target;
+    }
+
+    private async void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (state == MonsterState.GoingToDoor && collision.gameObject.CompareTag("BlockingObject"))
+        {           
+            if (Vector2.Distance(transform.position, targetPoint) < 1)
+            {
+                targetObject = collision.gameObject.GetComponent<BlockingObject>();
+                float aux = currentSpeed;
+                currentSpeed = 0;
+                await DestroyTargetObject();
+                currentSpeed = aux;
+            }
+        }
+        else if (collision.gameObject.CompareTag("Player"))
+        {
+            if(state == MonsterState.Chasing)
+            {
+                //TODO: The monster won
+                currentSpeed = 0;
+            }
+        }
     }
 
     private void OnDrawGizmos()

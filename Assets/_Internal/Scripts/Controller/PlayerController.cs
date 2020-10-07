@@ -215,5 +215,14 @@ public class PlayerController : MonoBehaviour {
         SetMovement(PlayerMovement.Continuous);
     }
 
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Monster"))
+        {
+            //TODO: Game Over
+            Debug.Log("Game Over");
+        }
+    }
+
 }
 
