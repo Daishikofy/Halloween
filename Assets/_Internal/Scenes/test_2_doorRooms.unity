@@ -18257,6 +18257,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4802221333204261447, guid: a14441ed79a8831448099ddf90a1f6a0,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4802221333204261447, guid: a14441ed79a8831448099ddf90a1f6a0,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4802221333204261448, guid: a14441ed79a8831448099ddf90a1f6a0,
         type: 3}
       propertyPath: currentRoom
@@ -18280,12 +18290,12 @@ PrefabInstance:
     - target: {fileID: 4802221333204261450, guid: a14441ed79a8831448099ddf90a1f6a0,
         type: 3}
       propertyPath: m_LinearOffset.x
-      value: -2.14
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4802221333204261450, guid: a14441ed79a8831448099ddf90a1f6a0,
         type: 3}
       propertyPath: m_LinearOffset.y
-      value: -0.83
+      value: 5.93
       objectReference: {fileID: 0}
     - target: {fileID: 4802221333204261453, guid: a14441ed79a8831448099ddf90a1f6a0,
         type: 3}
