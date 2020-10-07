@@ -313,7 +313,7 @@ public class MonsterController : MonoBehaviour
         return target;
     }
 
-    private async void OnCollisionEnter2D(Collision2D collision)
+    private async void OnTriggerEnter2D(Collider2D collision)
     {
         if (state == MonsterState.GoingToDoor && collision.gameObject.CompareTag("BlockingObject"))
         {           

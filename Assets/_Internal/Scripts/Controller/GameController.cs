@@ -11,7 +11,7 @@ public class GameController : MonoBehaviour
 
     public GameUIController ui;
     public PlayerController player;
-    public CameraController camera;
+    public CameraController cameraController;
     public MonsterController[] monsters;
 
     public RoomObject[] rooms;
@@ -46,7 +46,7 @@ public class GameController : MonoBehaviour
             }
         }
         var currentRoom = player.currentRoom;
-        camera.Setup(currentRoom.type
+        cameraController.Setup(currentRoom.type
             , currentRoom.cameraMin.position
             , currentRoom.cameraMax.position);
     }
@@ -58,7 +58,7 @@ public class GameController : MonoBehaviour
         player.currentRoom.isPlayerInRoom = true;
         player.GoTo(frontDoorPosition);
 
-        camera.GoTo(newRoom.type, newRoom.cameraMin.position, newRoom.cameraMax.position);
+        cameraController.GoTo(newRoom.type, newRoom.cameraMin.position, newRoom.cameraMax.position);
     }
 
     public void MonsterChangesRoom(int monsterId, RoomObject newRoom, Vector2 frontDoorPosition)

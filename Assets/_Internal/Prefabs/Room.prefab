@@ -46,11 +46,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7514675bf82558745b5481fbf41697e1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomId: 0
+  id: 0
   doors: []
   type: 0
-  cameraMin: {fileID: 0}
-  cameraMax: {fileID: 0}
+  cameraMin: {fileID: 4774687479315215183}
+  cameraMax: {fileID: 6982179416714509018}
   isPlayerInRoom: 0
   isMonsterInRoom: 0
 --- !u!1 &683960598646370268

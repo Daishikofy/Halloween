@@ -6,7 +6,7 @@ using UnityEngine.Events;
 public class BlockingObject : MonoBehaviour, IDragable
 {
     public int lifePoints;
-    public Collider2D collider;
+    public Collider2D objectCollider;
     [HideInInspector]
     public BlockingObjectEvent destroyed;
 
@@ -29,7 +29,7 @@ public class BlockingObject : MonoBehaviour, IDragable
     public void DestroyObject()
     {
         //TODO: Destroy animation
-        collider.enabled = false;
+        objectCollider.enabled = false;
         destroyed.Invoke(this);
     }
 
