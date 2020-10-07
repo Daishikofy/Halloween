@@ -219,8 +219,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (collision.gameObject.CompareTag("Monster"))
         {
-            //TODO: Game Over
-            Debug.Log("Game Over");
+            GameController.Instance.OnPlayerLose();
         }
     }
 

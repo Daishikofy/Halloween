@@ -256,7 +256,7 @@ public class MonsterController : MonoBehaviour
 
     private async Task DestroyTargetObject()
     {
-        while (targetObject.lifePoints > 0)
+        while (targetObject.lifePoints > 0 && targetDoor.blockingObjects.Contains(targetObject))
         {
             await Task.Delay((int)(attackRate * 1000));
             targetObject.Damaged();
