@@ -172,7 +172,6 @@ public class MonsterController : MonoBehaviour
             SetState(MonsterState.Patroling);
         else
             SetState(next);
-        Debug.Log("CheckCurrentRoom: " + state);
     }
 
     public async void GoToNextRoom()
@@ -210,6 +209,7 @@ public class MonsterController : MonoBehaviour
     {
         if (player.currentRoom.id != currentRoom.id)
         {
+            Debug.Log("ChasePlayer: 1");
             GameController.Instance.MonsterFollowsPlayer(id);
         }
         if (Vector2.Distance(transform.position, targetPoint) < 0.1f)
@@ -224,7 +224,7 @@ public class MonsterController : MonoBehaviour
     {
         targetDoor = currentRoom.GetDoorToAdjacentRoom(roomId);
         if (targetDoor == null) return;
-        Debug.LogError("Target door to room " + roomId + " is: " + targetDoor.name);
+        Debug.Log("Target door to room " + roomId + " is: " + targetDoor.name);
         SetState(MonsterState.GoingToDoor);
     }
 
@@ -277,7 +277,6 @@ public class MonsterController : MonoBehaviour
         {
             monsterMovement = Vector2.zero;
             SetState(nextState.Dequeue());
-            Debug.Log("Walk to target: ");
         }
     }
 

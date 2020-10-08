@@ -59,6 +59,10 @@ public class GameController : MonoBehaviour
         player.GoTo(frontDoorPosition);
 
         cameraController.GoTo(newRoom.type, newRoom.cameraMin.position, newRoom.cameraMax.position);
+        foreach (var monster in monsters)
+        {
+            monster.CheckCurrentRoom();
+        }
     }
 
     public void MonsterChangesRoom(int monsterId, RoomObject newRoom, Vector2 frontDoorPosition)

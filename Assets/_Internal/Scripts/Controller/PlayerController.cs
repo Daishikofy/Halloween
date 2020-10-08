@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System;
-using System.Collections.Generic;
+using Unity.Mathematics;
 using Unity.Mathematics;
 
 [Serializable]
@@ -14,6 +13,8 @@ public enum PlayerMovement
 }
 
 public class PlayerController : MonoBehaviour {
+    [Header("Object setup")]
+    public GameObject[] candyPrefabs;
     [Header("Physics setup")]
     [SerializeField]
     private float speed = 1;
@@ -41,7 +42,6 @@ public class PlayerController : MonoBehaviour {
 
     // Use this for initialization
     void Start () {
-        
         rb = GetComponent<Rigidbody2D>();
         SetMovement(playerMovimentation);
         SetDirection(new Vector2(0, -1));
@@ -49,6 +49,8 @@ public class PlayerController : MonoBehaviour {
         //Desable isDraging
         joint.connectedBody = null;
         joint.enabled = false;
+
+        inventory = new InventoryController();
     }
 	
 	// Update is called once per frame
@@ -158,13 +160,15 @@ public class PlayerController : MonoBehaviour {
 
     private void Interact()
     {
-        RaycastHit2D hit = Physics2D.Raycast(transform.position, playerDirection, 0.5f);
+        Vector3 startPoint = transform.position;
+        startPoint.y -= 0.1f;
+        RaycastHit2D hit = Physics2D.Raycast(startPoint, playerDirection, 0.5f);
         //Debug.Log("fraction: " + hit.fraction);
-        Debug.DrawRay(transform.position, playerDirection, Color.red, 0.5f);
+        Debug.DrawRay(startPoint, playerDirection, Color.red, 0.5f);
 
         if (hit.collider == null)
         {
-            //TODO: Drop some candies maybe
+            DropCandy();
             return;
         }
         var other = hit.collider.gameObject;
@@ -176,6 +180,22 @@ public class PlayerController : MonoBehaviour {
         else if (other.GetComponent<IDragable>() != null)
         {
             GrabObject(other);
+        }
+    }
+
+    public void CollectItem(string itemName)
+    {
+        //TODO: Animations
+        inventory.GetObject(itemName, 1);
+    }
+
+    private void DropCandy()
+    {
+        if (inventory.UseObject(collectibleType.Candy.ToString()))
+        {
+            //TODO: Animations drop candy
+            var index = UnityEngine.Random.Range(0, candyPrefabs.Length);
+            Instantiate(candyPrefabs[index], transform.position, quaternion.identity);
         }
     }
 

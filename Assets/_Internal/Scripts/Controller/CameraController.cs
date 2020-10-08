@@ -37,6 +37,7 @@ public class CameraController : MonoBehaviour
     public void Setup(CameraMovement movement, Vector2 min, Vector2 max)
     {
         cameraMovimentation = movement;
+        SetupMinMax(min, max);
         var aux = Utils.NearestPointOnSegment(transform.position, min, max);
         transform.position = new Vector3(aux.x, aux.y, -10);
     }
@@ -98,6 +99,23 @@ public class CameraController : MonoBehaviour
         float time = distance / transitionSpeed;
         transform.LeanMove(targetPoint, time);
         await Task.Delay((int)time*1000);
+        SetupMinMax(min, max);
         SetMovement(cameraMovimentation);
+    }
+
+    private void SetupMinMax(Vector2 min, Vector2 max)
+    {
+        if (cameraMovimentation == CameraMovement.Horizontal)
+        {
+            cameraMovement.y = min.y;
+            minPosition = min.x;
+            maxPosition = max.x;
+        }
+        else
+        {
+            cameraMovement.x = min.x;
+            minPosition = min.y;
+            maxPosition = max.y;
+        }
     }
 }
