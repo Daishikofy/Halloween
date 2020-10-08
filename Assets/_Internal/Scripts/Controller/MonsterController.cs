@@ -223,6 +223,7 @@ public class MonsterController : MonoBehaviour
     public void GoToRoom(int roomId)
     {
         targetDoor = currentRoom.GetDoorToAdjacentRoom(roomId);
+        if (targetDoor == null) return;
         Debug.LogError("Target door to room " + roomId + " is: " + targetDoor.name);
         SetState(MonsterState.GoingToDoor);
     }
@@ -338,7 +339,7 @@ public class MonsterController : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
+        Gizmos.color = Color.blue;
         Gizmos.DrawSphere(targetPoint, 0.3f);
     }
 }

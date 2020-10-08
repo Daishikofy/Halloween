@@ -35,7 +35,7 @@ public class FrontDoorObject : MonoBehaviour
 
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(0.1f, 1, 0.4f, 0.5f);
+        Gizmos.color = new Color(0.9f, 0, 0.4f, 0.5f);
         Gizmos.DrawCube(transform.position, transform.localScale);
     }
 }

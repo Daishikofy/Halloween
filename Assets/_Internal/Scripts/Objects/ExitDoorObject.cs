@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBehaviourScript : MonoBehaviour, IInteractable
+public class ExitDoorObject : MonoBehaviour, IInteractable
 {
     public bool OnInteraction(PlayerController player)
     {
