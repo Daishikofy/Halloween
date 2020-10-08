@@ -217,18 +217,9 @@ public class PlayerController : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        Debug.Log("OnTriggerEnter2D: " + collision.gameObject.tag);
         if (collision.gameObject.CompareTag("Monster"))
         {
             GameController.Instance.OnPlayerLose();
-        }
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Monster"))
-        {
-            Debug.Log("OI");
         }
     }
 
