@@ -9,7 +9,8 @@ public enum PlayerMovement
     Continuous,
     Horizontal,
     Vertical,
-    Automatic
+    Automatic,
+    None
 }
 
 public class PlayerController : MonoBehaviour {
@@ -25,6 +26,7 @@ public class PlayerController : MonoBehaviour {
 
     [Header("Runtime variables")]
     public RoomObject currentRoom;
+    public bool isHidding;
     public bool automaticMovement;
 
     //Physics and movement
@@ -127,6 +129,9 @@ public class PlayerController : MonoBehaviour {
             case PlayerMovement.Vertical:
                 currentMovement = () => VerticalMovement();
                 break;
+            case PlayerMovement.None:
+                currentMovement = () => { playerMovement = Vector2.zero; };
+                break;
             default:
                 break;
         }
@@ -160,6 +165,12 @@ public class PlayerController : MonoBehaviour {
 
     private void Interact()
     {
+        if (isHidding)
+        {
+            Unhides(null);
+            isHidding = false;
+            return;
+        }
         Vector3 startPoint = transform.position;
         startPoint.y -= 0.1f;
         RaycastHit2D hit = Physics2D.Raycast(startPoint, playerDirection, 0.5f);
@@ -235,6 +246,24 @@ public class PlayerController : MonoBehaviour {
         SetMovement(PlayerMovement.Continuous);
     }
 
+    public void Hides()
+    {
+        isHidding = true;
+        GetComponent<Collider2D>().enabled = false;
+        GetComponent<SpriteRenderer>().enabled = false;
+        SetMovement(PlayerMovement.None);
+    }
+    public void Unhides(DestroyableObject destroyable)
+    {
+        isHidding = false;
+        GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
+        GetComponent<Collider2D>().enabled = true;
+        GetComponent<SpriteRenderer>().enabled = true;
+        playerDirection *= -1;
+        if (destroyable)
+            transform.position = destroyable.transform.position;
+        SetMovement(PlayerMovement.Continuous);
+    }
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.CompareTag("Monster"))

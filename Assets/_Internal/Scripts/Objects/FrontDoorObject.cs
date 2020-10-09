@@ -6,16 +6,16 @@ using UnityEngine;
 public class FrontDoorObject : MonoBehaviour
 {
     [HideInInspector]
-    public BlockingObjectEvent objectEnters;
+    public DestroyableObjectEvent objectEnters;
     [HideInInspector]
-    public BlockingObjectEvent objectExits;
+    public DestroyableObjectEvent objectExits;
 
     public RoomObject room;
 
     private void Awake()
     {
-        objectEnters = new BlockingObjectEvent();
-        objectExits = new BlockingObjectEvent();
+        objectEnters = new DestroyableObjectEvent();
+        objectExits = new DestroyableObjectEvent();
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {

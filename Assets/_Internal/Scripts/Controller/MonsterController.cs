@@ -52,7 +52,7 @@ public class MonsterController : MonoBehaviour
     private Vector2 targetPoint;
 
     private DoorObject targetDoor;
-    private BlockingObject targetObject;
+    private DestroyableObject targetObject;
 
     private float breakTimeEnd;
     private float patrolCycleEnd;
@@ -176,20 +176,20 @@ public class MonsterController : MonoBehaviour
 
     public async void GoToNextRoom()
     {
-        while (targetDoor.blockingObjects.Count > 0)
+        while (targetDoor.destroyableObjects.Count > 0)
         {
             float minDist = Vector2.Distance(transform.position, targetPoint);
             targetObject = null;
-            foreach (var blocking in targetDoor.blockingObjects)
+            foreach (var destroyable in targetDoor.destroyableObjects)
             {
-                if (Math.Abs(Vector2.Distance(transform.position, blocking.transform.position) - minDist) < 1)
+                if (Math.Abs(Vector2.Distance(transform.position, destroyable.transform.position) - minDist) < 1)
                 {
-                    targetObject = blocking;
-                    targetPoint = (transform.position - blocking.transform.position).normalized * 0.5f;
+                    targetObject = destroyable;
+                    targetPoint = (transform.position - destroyable.transform.position).normalized * 0.5f;
                 }
                 else if (targetObject == null)
                 {
-                    targetObject = targetDoor.blockingObjects[0];
+                    targetObject = targetDoor.destroyableObjects[0];
                     targetPoint = targetDoor.frontDoors[0].room.id == currentRoom.id ?
                         targetDoor.frontDoors[0].transform.position :
                         targetDoor.frontDoors[1].transform.position;
@@ -257,7 +257,7 @@ public class MonsterController : MonoBehaviour
 
     private async Task DestroyTargetObject()
     {
-        while (targetObject.lifePoints > 0 && targetDoor.blockingObjects.Contains(targetObject))
+        while (targetObject.lifePoints > 0 && targetDoor.destroyableObjects.Contains(targetObject))
         {
             await Task.Delay((int)(attackRate * 1000));
             targetObject.Damaged();
@@ -315,11 +315,11 @@ public class MonsterController : MonoBehaviour
 
     private async void OnTriggerEnter2D(Collider2D collision)
     {
-        if (state == MonsterState.GoingToDoor && collision.gameObject.CompareTag("BlockingObject"))
+        if (state == MonsterState.GoingToDoor && collision.gameObject.CompareTag("DestroyableObject"))
         {           
             if (Vector2.Distance(transform.position, targetPoint) < 1)
             {
-                targetObject = collision.gameObject.GetComponent<BlockingObject>();
+                targetObject = collision.gameObject.GetComponent<DestroyableObject>();
                 float aux = currentSpeed;
                 currentSpeed = 0;
                 await DestroyTargetObject();

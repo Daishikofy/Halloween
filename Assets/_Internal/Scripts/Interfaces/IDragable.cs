@@ -1,5 +1,5 @@
 ﻿
 public interface IDragable 
 {
-    bool Damaged();
+    //bool Damaged();
 }

@@ -14,17 +14,17 @@ public class DoorObject : MonoBehaviour, IInteractable
 
     [Header("Run time variables")]
     public bool isBlocked;
-    public List<BlockingObject> blockingObjects;
+    public List<DestroyableObject> destroyableObjects;
 
     private int doorUsers = 0;
 
     private void Start()
     {
-        blockingObjects = new List<BlockingObject>();
+        destroyableObjects = new List<DestroyableObject>();
         foreach (var frontDoor in frontDoors)
         {
-            frontDoor.objectEnters.AddListener(AddBlockingObject);
-            frontDoor.objectExits.AddListener(RemoveBlockingObject);
+            frontDoor.objectEnters.AddListener(AddDestroyableObject);
+            frontDoor.objectExits.AddListener(RemoveDestroyableObject);
         }
     }
 
@@ -62,23 +62,23 @@ public class DoorObject : MonoBehaviour, IInteractable
         return true;
     }
 
-    private void AddBlockingObject(BlockingObject blockingObject)
+    private void AddDestroyableObject(DestroyableObject destroyableObject)
     {
         isBlocked = true;
-        blockingObject.destroyed.AddListener(RemoveBlockingObject);
-        blockingObjects.Add(blockingObject);
+        destroyableObject.destroyed.AddListener(RemoveDestroyableObject);
+        destroyableObjects.Add(destroyableObject);
     }
 
-    private void RemoveBlockingObject(BlockingObject blockingObject)
+    private void RemoveDestroyableObject(DestroyableObject destroyableObject)
     {
         Debug.Log("Remove blocking object");
-        if(blockingObjects.Contains(blockingObject))
+        if(destroyableObjects.Contains(destroyableObject))
         {
-            blockingObject.destroyed.RemoveListener(RemoveBlockingObject);
-            blockingObjects.Remove(blockingObject);
+            destroyableObject.destroyed.RemoveListener(RemoveDestroyableObject);
+            destroyableObjects.Remove(destroyableObject);
         }
 
-        isBlocked = blockingObjects.Count != 0;
+        isBlocked = destroyableObjects.Count != 0;
     }
 
     private async void OpenDoor(PlayerController player)
