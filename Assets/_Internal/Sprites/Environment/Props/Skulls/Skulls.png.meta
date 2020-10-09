@@ -1,19 +1,22 @@
 fileFormatVersion: 2
-guid: c71e49013515a2d499f9ddde53e801e9
+guid: 2519f1d1263960746ab80d40d8d28c5b
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5852135935505538600
-    second: Furniture_0
+      213: 472940104862866216
+    second: Skulls_0
   - first:
-      213: 6580706180292963874
-    second: Furniture_1
+      213: -114089760156206853
+    second: Skulls_1
   - first:
-      213: 386036536682977627
-    second: Furniture_0
+      213: 5684648748134772342
+    second: Skulls_2
   - first:
-      213: -3361905447854905090
-    second: Furniture_1
+      213: 3319792035087649572
+    second: Skulls_3
+  - first:
+      213: -3963470830934798325
+    second: Skulls_4
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -123,13 +126,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Furniture_0
+      name: Skulls_0
       rect:
         serializedVersion: 2
         x: 0
         y: 64
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -137,20 +140,20 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: b599f4f4f2a7b5500800000000000000
-      internalID: 386036536682977627
+      spriteID: 82b13660588309600800000000000000
+      internalID: 472940104862866216
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Furniture_1
+      name: Skulls_1
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 64
-        height: 64
+        x: 32
+        y: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +161,71 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef8682caecc1851d0800000000000000
-      internalID: -3361905447854905090
+      spriteID: bf83165b7fbaa6ef0800000000000000
+      internalID: -114089760156206853
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skulls_2
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 67e2179faede3ee40800000000000000
+      internalID: 5684648748134772342
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skulls_3
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 42b02935445421e20800000000000000
+      internalID: 3319792035087649572
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Skulls_4
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: b005284574ceef8c0800000000000000
+      internalID: -3963470830934798325
       vertices: []
       indices: 
       edges: []

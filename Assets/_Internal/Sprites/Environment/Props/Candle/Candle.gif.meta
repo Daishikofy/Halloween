@@ -1,19 +1,10 @@
 fileFormatVersion: 2
-guid: c71e49013515a2d499f9ddde53e801e9
+guid: 0b4b4294084c4de4a8d7527667710f1d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 5852135935505538600
-    second: Furniture_0
-  - first:
-      213: 6580706180292963874
-    second: Furniture_1
-  - first:
-      213: 386036536682977627
-    second: Furniture_0
-  - first:
-      213: -3361905447854905090
-    second: Furniture_1
+      213: 2798290011037525337
+    second: Candle_0
   externalObjects: {}
   serializedVersion: 11
   mipmaps:
@@ -123,34 +114,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Furniture_0
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 64
-        width: 64
-        height: 64
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-      bones: []
-      spriteID: b599f4f4f2a7b5500800000000000000
-      internalID: 386036536682977627
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Furniture_1
+      name: Candle_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 64
-        height: 64
+        width: 32
+        height: 32
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -158,8 +128,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ef8682caecc1851d0800000000000000
-      internalID: -3361905447854905090
+      spriteID: 9556a6660f585d620800000000000000
+      internalID: 2798290011037525337
       vertices: []
       indices: 
       edges: []
