@@ -81,6 +81,7 @@ public class GameController : MonoBehaviour
     public void OnPlayerWin()
     {
         ui.OnGameEnded(true);
+        SaveGame();
     }
 
     public void OnPlayerLose()
@@ -90,6 +91,28 @@ public class GameController : MonoBehaviour
 
     private void RestartGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        ReloadLastSave();
+    }
+
+    public void SaveGame()
+    {
+        PlayerProperties.Instance.inventory = player.inventory;
+        PlayerProperties.Instance.scene = SceneManager.GetActiveScene().name;
+        PlayerProperties.Instance.SaveIntoJson();
+    }
+
+    public void LoadGame()
+    {
+        if (PlayerProperties.Instance.wasChanged)
+            if (!PlayerProperties.Instance.LoadFromJson()) return;
+        player.inventory = PlayerProperties.Instance.inventory;
+    }
+
+    public void ReloadLastSave()
+    {
+        if (!PlayerProperties.Instance.wasChanged)
+            if (!PlayerProperties.Instance.LoadFromJson()) return;
+        var scene = PlayerProperties.Instance.scene = SceneManager.GetActiveScene().name;
+        SceneManager.LoadScene(scene);
     }
 }
