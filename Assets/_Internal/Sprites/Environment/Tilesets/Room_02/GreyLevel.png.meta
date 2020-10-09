@@ -1,0 +1,698 @@
+fileFormatVersion: 2
+guid: c34d527aeb4f2da4b9adb4044f5fe146
+TextureImporter:
+  internalIDToNameTable:
+  - first:
+      213: -9081063194981690254
+    second: Grey level_0
+  - first:
+      213: -7810268126475497343
+    second: Grey level_1
+  - first:
+      213: -6138390679811905916
+    second: Grey level_2
+  - first:
+      213: -5757397368066844409
+    second: Grey level_3
+  - first:
+      213: -3357887498208782319
+    second: Grey level_4
+  - first:
+      213: 5100534010210396429
+    second: Grey level_5
+  - first:
+      213: -8621105710403235704
+    second: Grey level_6
+  - first:
+      213: 13239065954399148
+    second: Grey level_7
+  - first:
+      213: 762522717333979655
+    second: Grey level_8
+  - first:
+      213: 7370325119404326823
+    second: Grey level_9
+  - first:
+      213: -2188428146734206787
+    second: Grey level_10
+  - first:
+      213: -2690792459107199123
+    second: Grey level_0
+  - first:
+      213: 8398048233549974548
+    second: Grey level_1
+  - first:
+      213: -1464591709959811714
+    second: Grey level_2
+  - first:
+      213: -668094696853836933
+    second: Grey level_3
+  - first:
+      213: 6727794974890479350
+    second: Grey level_4
+  - first:
+      213: -2234739132971546219
+    second: Grey level_5
+  - first:
+      213: 7113602736544937845
+    second: Grey level_6
+  - first:
+      213: -1472927656228198555
+    second: Grey level_7
+  - first:
+      213: -5061840361424626702
+    second: Grey level_8
+  - first:
+      213: 7739015980028472423
+    second: Grey level_9
+  - first:
+      213: 7415934038220975679
+    second: Grey level_10
+  - first:
+      213: 5178999817572668790
+    second: Grey level_11
+  - first:
+      213: -6299710191532943882
+    second: Grey level_12
+  - first:
+      213: 5553897250744132274
+    second: Grey level_13
+  - first:
+      213: -406439995098607097
+    second: Grey level_11
+  - first:
+      213: 3300619004221742442
+    second: Grey level_12
+  - first:
+      213: 6266456664086195058
+    second: Grey level_13
+  - first:
+      213: 7943401783207408359
+    second: Grey level_14
+  - first:
+      213: -1034097569485422786
+    second: Grey level_15
+  - first:
+      213: 6939186558689919883
+    second: Grey level_16
+  - first:
+      213: 6792620849183796531
+    second: Grey level_17
+  - first:
+      213: -1373632497287409589
+    second: Grey level_18
+  - first:
+      213: -7504061739291672624
+    second: Grey level_14
+  - first:
+      213: 1894382146531718702
+    second: Grey level_15
+  - first:
+      213: 9201896122561067341
+    second: Grey level_16
+  - first:
+      213: -3327892975661745030
+    second: Grey level_17
+  - first:
+      213: -2693378667122205430
+    second: Grey level_18
+  - first:
+      213: 8623045517757146168
+    second: GreyLevel_0
+  - first:
+      213: -5521925527946877687
+    second: GreyLevel_1
+  - first:
+      213: -254382165433707186
+    second: GreyLevel_2
+  - first:
+      213: -8044702853277573476
+    second: GreyLevel_3
+  - first:
+      213: -127108507303808711
+    second: GreyLevel_4
+  - first:
+      213: -4203470712726517444
+    second: GreyLevel_5
+  - first:
+      213: -511115968017996426
+    second: GreyLevel_6
+  - first:
+      213: -1838092057553857377
+    second: GreyLevel_7
+  - first:
+      213: 4373441447142541447
+    second: GreyLevel_8
+  - first:
+      213: 7384324375313789846
+    second: GreyLevel_9
+  - first:
+      213: -7633010146251221758
+    second: GreyLevel_10
+  - first:
+      213: -8606588382315823483
+    second: GreyLevel_11
+  - first:
+      213: 8056482182294383815
+    second: GreyLevel_12
+  - first:
+      213: -2134604625858916522
+    second: GreyLevel_13
+  - first:
+      213: 6283663215599593524
+    second: GreyLevel_14
+  - first:
+      213: -7529875826284506553
+    second: GreyLevel_15
+  - first:
+      213: 2784250609715053748
+    second: GreyLevel_16
+  - first:
+      213: -5374995098249016531
+    second: GreyLevel_17
+  - first:
+      213: 4159847533522423904
+    second: GreyLevel_18
+  externalObjects: {}
+  serializedVersion: 11
+  mipmaps:
+    mipMapMode: 0
+    enableMipMap: 0
+    sRGBTexture: 1
+    linearTexture: 0
+    fadeOut: 0
+    borderMipMap: 0
+    mipMapsPreserveCoverage: 0
+    alphaTestReferenceValue: 0.5
+    mipMapFadeDistanceStart: 1
+    mipMapFadeDistanceEnd: 3
+  bumpmap:
+    convertToNormalMap: 0
+    externalNormalMap: 0
+    heightScale: 0.25
+    normalMapFilter: 0
+  isReadable: 0
+  streamingMipmaps: 0
+  streamingMipmapsPriority: 0
+  grayScaleToAlpha: 0
+  generateCubemap: 6
+  cubemapConvolution: 0
+  seamlessCubemap: 0
+  textureFormat: 1
+  maxTextureSize: 2048
+  textureSettings:
+    serializedVersion: 2
+    filterMode: 0
+    aniso: -1
+    mipBias: -100
+    wrapU: 1
+    wrapV: 1
+    wrapW: 1
+  nPOTScale: 0
+  lightmap: 0
+  compressionQuality: 50
+  spriteMode: 2
+  spriteExtrude: 1
+  spriteMeshType: 1
+  alignment: 0
+  spritePivot: {x: 0.5, y: 0.5}
+  spritePixelsToUnits: 32
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
+  alphaUsage: 1
+  alphaIsTransparency: 1
+  spriteTessellationDetail: -1
+  textureType: 8
+  textureShape: 1
+  singleChannelComponent: 0
+  maxTextureSizeSet: 0
+  compressionQualitySet: 0
+  textureFormatSet: 0
+  applyGammaDecoding: 0
+  platformSettings:
+  - serializedVersion: 3
+    buildTarget: DefaultTexturePlatform
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Standalone
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: -1
+    textureCompression: 0
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  spriteSheet:
+    serializedVersion: 2
+    sprites:
+    - serializedVersion: 2
+      name: GreyLevel_0
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 83460f726363ba770800000000000000
+      internalID: 8623045517757146168
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_1
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 905a09e1dfd2e53b0800000000000000
+      internalID: -5521925527946877687
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_2
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 192
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e451120b4c0487cf0800000000000000
+      internalID: -254382165433707186
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_3
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c9e91daa0697b5090800000000000000
+      internalID: -8044702853277573476
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_4
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 931f93e6c7b6c3ef0800000000000000
+      internalID: -127108507303808711
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_5
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 160
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c398d2068a54aa5c0800000000000000
+      internalID: -4203470712726517444
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_6
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 675e14f2cb628e8f0800000000000000
+      internalID: -511115968017996426
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_7
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: f9419052309cd76e0800000000000000
+      internalID: -1838092057553857377
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_8
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 128
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 788c6ee13d591bc30800000000000000
+      internalID: 4373441447142541447
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_9
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 69336d045e36a7660800000000000000
+      internalID: 7384324375313789846
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_10
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2055eb1a6b9121690800000000000000
+      internalID: -7633010146251221758
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_11
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 96
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 58ebf0847714f8880800000000000000
+      internalID: -8606588382315823483
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_12
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7ccabe61cdf5ecf60800000000000000
+      internalID: 8056482182294383815
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_13
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 65f06c3076c5062e0800000000000000
+      internalID: -2134604625858916522
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_14
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 64
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 438a00ef66e043750800000000000000
+      internalID: 6283663215599593524
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_15
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 742d28bb4d1808790800000000000000
+      internalID: -7529875826284506553
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_16
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 4b40bbd8d25a3a620800000000000000
+      internalID: 2784250609715053748
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_17
+      rect:
+        serializedVersion: 2
+        x: 64
+        y: 32
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: d2bc663af6e2865b0800000000000000
+      internalID: -5374995098249016531
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: GreyLevel_18
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 0
+        width: 32
+        height: 32
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 060936bba4fbab930800000000000000
+      internalID: 4159847533522423904
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    outline: []
+    physicsShape: []
+    bones: []
+    spriteID: 5e97eb03825dee720800000000000000
+    internalID: 0
+    vertices: []
+    indices: 
+    edges: []
+    weights: []
+    secondaryTextures: []
+  spritePackingTag: 
+  pSDRemoveMatte: 0
+  pSDShowRemoveMatteOption: 0
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
