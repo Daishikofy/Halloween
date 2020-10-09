@@ -49,6 +49,8 @@ public class GameController : MonoBehaviour
         cameraController.Setup(currentRoom.type
             , currentRoom.cameraMin.position
             , currentRoom.cameraMax.position);
+
+        LoadGame();
     }
 
     public void PlayerChangesRoom(RoomObject newRoom, Vector2 frontDoorPosition)
