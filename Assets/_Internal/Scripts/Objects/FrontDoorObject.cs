@@ -19,7 +19,7 @@ public class FrontDoorObject : MonoBehaviour
     }
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("BlockingObject"))
+        if (collision.CompareTag("DestroyableObject"))
         {
             objectEnters.Invoke(collision.GetComponent<BlockingObject>());
         }
@@ -27,7 +27,7 @@ public class FrontDoorObject : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("BlockingObject"))
+        if (collision.CompareTag("DestroyableObject"))
         {
             objectExits.Invoke(collision.GetComponent<BlockingObject>());
         }

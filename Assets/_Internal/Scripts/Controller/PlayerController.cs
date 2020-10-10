@@ -198,6 +198,7 @@ public class PlayerController : MonoBehaviour {
     {
         //TODO: Animations
         inventory.GetObject(itemName, 1);
+        currentRoom.UpdateObjects();
     }
 
     private void DropCandy()
@@ -206,7 +207,8 @@ public class PlayerController : MonoBehaviour {
         {
             //TODO: Animations drop candy
             var index = UnityEngine.Random.Range(0, candyPrefabs.Length);
-            Instantiate(candyPrefabs[index], transform.position, quaternion.identity);
+            var obj = Instantiate(candyPrefabs[index], transform.position, quaternion.identity);
+            currentRoom.objectsInRoom.Add(obj);
         }
     }
 

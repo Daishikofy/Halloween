@@ -6,6 +6,7 @@ TagManager:
   tags:
   - BlockingObject
   - Monster
+  - DestroyableObject
   layers:
   - Default
   - TransparentFX

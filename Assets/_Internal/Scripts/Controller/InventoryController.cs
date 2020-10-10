@@ -20,22 +20,24 @@ public class InventoryController
             inventory.Remove(name);
             inventory.Add(name, value + quantity);
         }
-        else
-        {
-            inventory.Add(name, quantity);
-        }
+        inventory.Add(name, value + quantity);        
     }
 
     public bool UseObject(string name)
     {
         int value;
-        if (inventory.TryGetValue(name, out value))
+        if (!inventory.ContainsKey(name))
+            return false;
+
+        value = inventory[name];
+        inventory.Remove(name);
+        value--;
+        if (value < 0)
         {
-            inventory.Remove(name);
-            if ((value -= 1) > 0)
-                inventory.Add(name, value);
-            return true;
+            value = 0;
+            return false;
         }
-        return false;
+        inventory.Add(name, value);
+        return true;
     }
 }

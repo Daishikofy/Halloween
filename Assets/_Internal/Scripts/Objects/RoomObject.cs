@@ -13,6 +13,7 @@ public class RoomObject : MonoBehaviour
     [Tooltip("Min value between which the camera can move when RoomType is Vertical or Horizontal")]
     public Transform cameraMax;
     [Header("Runtime variables")]
+    public List<GameObject> objectsInRoom;
     public bool isPlayerInRoom;
     public bool isMonsterInRoom;
     // Start is called before the first frame update
@@ -36,6 +37,7 @@ public class RoomObject : MonoBehaviour
                 cameraMax = cameraMin;
             }
         }
+        objectsInRoom = new List<GameObject>();
     }
 
     public bool isAdjacent(int roomId)
@@ -65,5 +67,16 @@ public class RoomObject : MonoBehaviour
             }
         }
         return null;
+    }
+
+    public void UpdateObjects()
+    {
+        foreach (var obj in objectsInRoom)
+        {
+            if (obj == null)
+            {
+                objectsInRoom.Remove(obj);
+            }    
+        }
     }
 }

@@ -222,6 +222,26 @@ TilemapCollider2D:
   m_Offset: {x: 0, y: 0}
   m_MaximumTileChangeCount: 1000
   m_ExtrusionFactor: 0.00001
+--- !u!1 &44376796 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6458936473496293505, guid: f26e93ff8e40faf4b8078ff95303817b,
+    type: 3}
+  m_PrefabInstance: {fileID: 1660682773}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &44376797
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 44376796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75f041a8169433468296482f5f168cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lifePoints: 10
+  objectCollider: {fileID: 2098175490}
 --- !u!1001 &48541696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -595,7 +615,7 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.468
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 1
+  m_Intensity: 0.8
   m_LightVolumeOpacity: 0
   m_ApplyToSortingLayers: 00000000
   m_LightCookieSprite: {fileID: 0}
@@ -991,6 +1011,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: BlockingObj_Base
+      objectReference: {fileID: 0}
+    - target: {fileID: 6458936473496293505, guid: f26e93ff8e40faf4b8078ff95303817b,
+        type: 3}
+      propertyPath: m_TagString
+      value: DestroyableObject
       objectReference: {fileID: 0}
     - target: {fileID: 6458936473496293516, guid: f26e93ff8e40faf4b8078ff95303817b,
         type: 3}
@@ -1761,6 +1786,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlockingObj_Base
       objectReference: {fileID: 0}
+    - target: {fileID: 6458936473496293505, guid: f26e93ff8e40faf4b8078ff95303817b,
+        type: 3}
+      propertyPath: m_TagString
+      value: DestroyableObject
+      objectReference: {fileID: 0}
     - target: {fileID: 6458936473496293516, guid: f26e93ff8e40faf4b8078ff95303817b,
         type: 3}
       propertyPath: m_Sprite
@@ -1866,6 +1896,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: BlockingObj_Base (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 6458936473496293505, guid: f26e93ff8e40faf4b8078ff95303817b,
+        type: 3}
+      propertyPath: m_TagString
+      value: DestroyableObject
+      objectReference: {fileID: 0}
     - target: {fileID: 6458936473496293516, guid: f26e93ff8e40faf4b8078ff95303817b,
         type: 3}
       propertyPath: m_Sprite
@@ -1875,7 +1910,7 @@ PrefabInstance:
     - target: {fileID: 6458936473496293516, guid: f26e93ff8e40faf4b8078ff95303817b,
         type: 3}
       propertyPath: m_Color.r
-      value: 1
+      value: 0.6976668
       objectReference: {fileID: 0}
     - target: {fileID: 6458936473496293516, guid: f26e93ff8e40faf4b8078ff95303817b,
         type: 3}
@@ -1885,7 +1920,7 @@ PrefabInstance:
     - target: {fileID: 6458936473496293516, guid: f26e93ff8e40faf4b8078ff95303817b,
         type: 3}
       propertyPath: m_Color.b
-      value: 1
+      value: 0.2216981
       objectReference: {fileID: 0}
     - target: {fileID: 6458936473496293517, guid: f26e93ff8e40faf4b8078ff95303817b,
         type: 3}
@@ -1957,7 +1992,8 @@ PrefabInstance:
       propertyPath: objectCollider
       value: 
       objectReference: {fileID: 2098175490}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 6458936473496293518, guid: f26e93ff8e40faf4b8078ff95303817b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f26e93ff8e40faf4b8078ff95303817b, type: 3}
 --- !u!1001 &1668412153
 PrefabInstance:
@@ -2418,6 +2454,7 @@ MonoBehaviour:
   type: 0
   cameraMin: {fileID: 4774687480824145088}
   cameraMax: {fileID: 6982179417285881173}
+  objectsInRoom: []
   isPlayerInRoom: 0
   isMonsterInRoom: 0
 --- !u!1 &601509753922932285
@@ -2474,6 +2511,7 @@ MonoBehaviour:
   type: 1
   cameraMin: {fileID: 4774687481065046418}
   cameraMax: {fileID: 6982179417115740167}
+  objectsInRoom: []
   isPlayerInRoom: 0
   isMonsterInRoom: 0
 --- !u!1 &601509754097265519
@@ -2530,6 +2568,7 @@ MonoBehaviour:
   type: 0
   cameraMin: {fileID: 4774687479616591298}
   cameraMax: {fileID: 6982179416345680983}
+  objectsInRoom: []
   isPlayerInRoom: 0
   isMonsterInRoom: 0
 --- !u!1 &601509754862845759
@@ -2661,6 +2700,7 @@ MonoBehaviour:
   type: 0
   cameraMin: {fileID: 4886679799978041502}
   cameraMax: {fileID: 7022887236506872075}
+  objectsInRoom: []
   isPlayerInRoom: 0
   isMonsterInRoom: 0
 --- !u!1 &705689083019643491
