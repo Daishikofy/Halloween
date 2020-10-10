@@ -9,12 +9,12 @@ public class GameController : MonoBehaviour
     private static GameController instance;
     public static GameController Instance { get { return instance; } }
 
-    public GameUIController ui;
     public PlayerController player;
-    public CameraController cameraController;
     public MonsterController[] monsters;
-
     public RoomObject[] rooms;
+    [Header("Object Setup")]
+    public GameUIController ui;
+    public CameraController cameraController;
 
     private void Awake()
     {

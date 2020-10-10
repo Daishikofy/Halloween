@@ -6,6 +6,7 @@ using UnityEngine;
 public class RoomObject : MonoBehaviour
 {
     public int id;
+    [HideInInspector]
     public List<DoorObject> doors = new List<DoorObject>();
     public CameraMovement type;
     [Tooltip("Max value between which the camera can move when RoomType is Vertical or Horizontal")]

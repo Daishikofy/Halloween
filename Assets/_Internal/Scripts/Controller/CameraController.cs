@@ -15,10 +15,10 @@ public enum CameraMovement
 
 public class CameraController : MonoBehaviour
 {
-    public CameraMovement cameraMovimentation = CameraMovement.Fixed;
-    public float transitionSpeed;
     public Transform playerPosition;
-
+    public float transitionSpeed;
+    public CameraMovement cameraMovimentation = CameraMovement.Fixed;
+    [Space]
     [Header("Runtime variables")]
     public float minPosition;
     public float maxPosition;
