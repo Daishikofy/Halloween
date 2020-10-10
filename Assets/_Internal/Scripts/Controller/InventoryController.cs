@@ -14,30 +14,29 @@ public class InventoryController
 
     public void GetObject(string name, int quantity)
     {
-        int value;
+        int value = 0;
+
         if (inventory.TryGetValue(name, out value))
         {
             inventory.Remove(name);
-            inventory.Add(name, value + quantity);
         }
         inventory.Add(name, value + quantity);        
     }
 
     public bool UseObject(string name)
     {
-        int value;
-        if (!inventory.ContainsKey(name))
-            return false;
+        int value = 0;
 
-        value = inventory[name];
-        inventory.Remove(name);
-        value--;
-        if (value < 0)
+        if (inventory.TryGetValue(name, out value))
         {
-            value = 0;
-            return false;
+            if (value > 0)
+            {
+                value--;
+                inventory.Remove(name);
+                inventory.Add(name, value);
+                return true;
+            }
         }
-        inventory.Add(name, value);
-        return true;
+        return false;
     }
 }

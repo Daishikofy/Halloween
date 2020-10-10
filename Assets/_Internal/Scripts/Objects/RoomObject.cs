@@ -6,7 +6,7 @@ using UnityEngine;
 public class RoomObject : MonoBehaviour
 {
     public int id;
-    public DoorObject[] doors;
+    public List<DoorObject> doors = new List<DoorObject>();
     public CameraMovement type;
     [Tooltip("Max value between which the camera can move when RoomType is Vertical or Horizontal")]
     public Transform cameraMin;
@@ -69,6 +69,17 @@ public class RoomObject : MonoBehaviour
         return null;
     }
 
+    public List<RoomObject> GetAdjacentRooms()
+    {
+        var rooms = new List<RoomObject>();
+        foreach (var door in doors)
+        {
+            var room = door.frontDoors[0].room.id == id ? door.frontDoors[1].room : door.frontDoors[0].room;
+            rooms.Add(room);
+        }
+        return rooms;
+    }
+
     public void UpdateObjects()
     {
         foreach (var obj in objectsInRoom)
@@ -76,6 +87,7 @@ public class RoomObject : MonoBehaviour
             if (obj == null)
             {
                 objectsInRoom.Remove(obj);
+                break;
             }    
         }
     }

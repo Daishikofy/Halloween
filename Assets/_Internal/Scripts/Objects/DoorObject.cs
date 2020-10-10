@@ -18,6 +18,11 @@ public class DoorObject : MonoBehaviour, IInteractable
 
     private int doorUsers = 0;
 
+    private void Awake()
+    {
+        Setup();
+    }
+
     private void Start()
     {
         destroyableObjects = new List<DestroyableObject>();
@@ -26,6 +31,12 @@ public class DoorObject : MonoBehaviour, IInteractable
             frontDoor.objectEnters.AddListener(AddDestroyableObject);
             frontDoor.objectExits.AddListener(RemoveDestroyableObject);
         }
+    }
+
+    private void Setup()
+    {
+        frontDoors[0].room.doors.Add(this);
+        frontDoors[1].room.doors.Add(this);
     }
 
     public bool OnInteraction(PlayerController player)
@@ -132,7 +143,17 @@ public class DoorObject : MonoBehaviour, IInteractable
     }
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = new Color(0.5f, 0, 0.4f, 0.5f);
-        Gizmos.DrawCube(transform.position, doorCollider.bounds.size);
+        if(frontDoors[0].room != null && frontDoors[1].room != null)
+        {
+            Gizmos.color = new Color(0f, 1f, 0f, 1f);
+            Gizmos.DrawSphere(frontDoors[0].room.transform.position, 0.1f);
+            Gizmos.DrawSphere(frontDoors[1].room.transform.position, 0.1f);
+            Gizmos.DrawLine(frontDoors[1].room.transform.position, frontDoors[0].room.transform.position);
+        }
+        else
+        {
+            Gizmos.color = new Color(0.5f, 0, 0.4f, 0.5f);
+            Gizmos.DrawCube(transform.position, doorCollider.bounds.size);
+        }
     }
 }

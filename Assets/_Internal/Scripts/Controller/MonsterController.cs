@@ -43,6 +43,7 @@ public class MonsterController : MonoBehaviour
     public MonsterState state;
     public bool isChasingPlayer;
 
+    private Queue<int> goingBackPath;
     private int currentPatrolRoomIndex;
     private Action currentMovement;
     private Queue<MonsterState> nextState;
@@ -61,6 +62,7 @@ public class MonsterController : MonoBehaviour
     void Start()
     {
         nextState = new Queue<MonsterState>();
+        goingBackPath = new Queue<int>();
         targetPoint = currentRoom.cameraMax.position;
         patrolCycleEnd = Time.time + patrolCycleRate;
         SetState(state);
@@ -98,6 +100,7 @@ public class MonsterController : MonoBehaviour
             case MonsterState.Chasing:
                 currentSpeed = chaseSpeed;
                 state = newState;
+                goingBackPath.Clear();
                 currentMovement = () => ChasePlayer();
                 break;
 
@@ -170,7 +173,7 @@ public class MonsterController : MonoBehaviour
             SetState(MonsterState.Chasing);
         else if (!currentRoom.isPlayerInRoom && next == MonsterState.Chasing)
             SetState(MonsterState.Patroling);
-        else
+        else if (next != state)
             SetState(next);
     }
 
@@ -201,6 +204,7 @@ public class MonsterController : MonoBehaviour
 
         if (targetDoor.OnInteraction(this))
         {
+            targetDoor = null;
             SetState(MonsterState.ChangingRoom);  
         }
     }
@@ -209,7 +213,6 @@ public class MonsterController : MonoBehaviour
     {
         if (player.currentRoom.id != currentRoom.id)
         {
-            Debug.Log("ChasePlayer: 1");
             GameController.Instance.MonsterFollowsPlayer(id);
         }
         if (Vector2.Distance(transform.position, targetPoint) < 0.1f)
@@ -232,9 +235,22 @@ public class MonsterController : MonoBehaviour
     {
         if (Time.time > patrolCycleEnd)
         {
-            currentPatrolRoomIndex = (currentPatrolRoomIndex + 1) % patrolPath.Length;
-
-            targetDoor = currentRoom.GetDoorToAdjacentRoom(patrolPath[currentPatrolRoomIndex].id);
+            int nextDoorIndex;
+            if (goingBackPath.Count == 0)
+            {
+                currentPatrolRoomIndex = (currentPatrolRoomIndex + 1) % patrolPath.Length;
+                nextDoorIndex = patrolPath[currentPatrolRoomIndex].id;
+                if (!currentRoom.isAdjacent(patrolPath[currentPatrolRoomIndex].id))
+                {
+                    goingBackPath = GameController.Instance.BackToRoom(currentRoom.id, patrolPath[currentPatrolRoomIndex].id);
+                    nextDoorIndex = goingBackPath.Dequeue();
+                }          
+            }
+            else
+            {
+                nextDoorIndex = goingBackPath.Dequeue();
+            }
+            targetDoor = currentRoom.GetDoorToAdjacentRoom(nextDoorIndex);
             SetState(MonsterState.GoingToDoor);
         }
         if (Time.time < breakTimeEnd)
@@ -253,15 +269,24 @@ public class MonsterController : MonoBehaviour
             monsterMovement = monsterMovement.normalized;
             SetDirection(monsterMovement);
         }
+        CheckCurrentRoom();
     }
 
     private async Task DestroyTargetObject()
     {
-        while (targetObject.lifePoints > 0 && targetDoor.destroyableObjects.Contains(targetObject))
-        {
-            await Task.Delay((int)(attackRate * 1000));
-            targetObject.Damaged();
-        }
+        if (targetDoor != null)
+            while (targetObject.lifePoints > 0 && targetDoor.destroyableObjects.Contains(targetObject))
+            {
+                await Task.Delay((int)(attackRate * 1000));
+                targetObject.Damaged();
+            }
+        else
+            while (targetObject.lifePoints > 0)
+            {
+                Debug.Log("targetObject.lifePoints: " + targetObject.lifePoints);
+                await Task.Delay((int)(attackRate * 1000));
+                targetObject.Damaged();
+            }
     }
 
     public void SetTargetPoint(Vector2 point)
@@ -315,15 +340,21 @@ public class MonsterController : MonoBehaviour
 
     private async void OnTriggerEnter2D(Collider2D collision)
     {
-        if (state == MonsterState.GoingToDoor && collision.gameObject.CompareTag("DestroyableObject"))
-        {           
-            if (Vector2.Distance(transform.position, targetPoint) < 1)
+        if (collision.gameObject.CompareTag("DestroyableObject"))
+        {
+            Debug.Log("Collision: DestroyableObject");
+            if (state == MonsterState.GoingToDoor || state == MonsterState.Chasing)
             {
-                targetObject = collision.gameObject.GetComponent<DestroyableObject>();
-                float aux = currentSpeed;
-                currentSpeed = 0;
-                await DestroyTargetObject();
-                currentSpeed = aux;
+                Debug.Log("State: " + state);
+                if (Vector2.Distance(transform.position, targetPoint) < 1)
+                {
+                    Debug.Log("Attack");
+                    targetObject = collision.gameObject.GetComponent<DestroyableObject>();
+                    float aux = currentSpeed;
+                    currentSpeed = 0;
+                    await DestroyTargetObject();
+                    currentSpeed = aux;
+                }
             }
         }
         else if (collision.gameObject.CompareTag("Player"))

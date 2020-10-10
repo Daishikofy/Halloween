@@ -167,8 +167,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (isHidding)
         {
-            Unhides(null);
-            isHidding = false;
+            Unhides(null);            
             return;
         }
         Vector3 startPoint = transform.position;
@@ -251,6 +250,7 @@ public class PlayerController : MonoBehaviour {
     public void Hides()
     {
         isHidding = true;
+        currentRoom.isPlayerInRoom = false;
         GetComponent<Collider2D>().enabled = false;
         GetComponent<SpriteRenderer>().enabled = false;
         SetMovement(PlayerMovement.None);
@@ -258,6 +258,7 @@ public class PlayerController : MonoBehaviour {
     public void Unhides(DestroyableObject destroyable)
     {
         isHidding = false;
+        currentRoom.isPlayerInRoom = true;
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Dynamic;
         GetComponent<Collider2D>().enabled = true;
         GetComponent<SpriteRenderer>().enabled = true;

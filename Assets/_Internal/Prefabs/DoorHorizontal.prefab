@@ -15,7 +15,7 @@ GameObject:
   m_Layer: 0
   m_Name: DoorHorizontal
   m_TagString: Untagged
-  m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
+  m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
@@ -104,7 +104,7 @@ MonoBehaviour:
   isLocked: 0
   objectToUnlock: 
   isBlocked: 0
-  blockingObjects: []
+  destroyableObjects: []
 --- !u!61 &1086728296564857651
 BoxCollider2D:
   m_ObjectHideFlags: 0
