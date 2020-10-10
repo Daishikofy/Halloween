@@ -112,7 +112,7 @@ public class PlayerController : MonoBehaviour {
         playerDirection = direction;
     }
 
-    private void SetMovement(PlayerMovement movement)
+    public void SetMovement(PlayerMovement movement)
     {
         playerMovimentation = movement;
         switch (movement)
