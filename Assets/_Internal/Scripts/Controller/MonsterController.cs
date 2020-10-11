@@ -31,6 +31,7 @@ public class MonsterController : MonoBehaviour
     public float patrolCycleRate = 10;
     public float attackRate = 5;
     public float timeBeforeSpotted = 1;
+    public float eatingTime = 5;
 
     [Header("Object Setup")]
     public int id;
@@ -57,6 +58,7 @@ public class MonsterController : MonoBehaviour
 
     private float breakTimeEnd;
     private float patrolCycleEnd;
+    private float eatingTimeEnd;
 
     // Start is called before the first frame update
     void Start()
@@ -94,6 +96,10 @@ public class MonsterController : MonoBehaviour
                 break;
 
             case MonsterState.Eating:
+                state = newState;
+                currentSpeed = 0;
+                eatingTimeEnd = Time.time + eatingTime;
+                currentMovement = () => Eating();
                 break;
 
 
@@ -126,7 +132,7 @@ public class MonsterController : MonoBehaviour
                 }
                 else 
                 {
-                    currentMovement = () => Patroling();
+                    SetState(MonsterState.Patroling);
                 }
                 break;
 
@@ -168,13 +174,38 @@ public class MonsterController : MonoBehaviour
         MonsterState next = MonsterState.Patroling;
         if (nextState.Count != 0)
              next = nextState.Dequeue();
+
         await Task.Delay((int)(timeBeforeSpotted * 1000));
-        if (currentRoom.isPlayerInRoom && next != MonsterState.Chasing)
-            SetState(MonsterState.Chasing);
-        else if (!currentRoom.isPlayerInRoom && next == MonsterState.Chasing)
-            SetState(MonsterState.Patroling);
-        else if (next != state)
+
+        if (CheckForPlayer())
+            return;
+        if (CheckForFood())
+            return;
+
+        if (next != state)
             SetState(next);
+    }
+
+    private bool CheckForPlayer()
+    {
+        if (currentRoom.isPlayerInRoom && state != MonsterState.Chasing)
+        {
+            SetState(MonsterState.Chasing);
+            return true;
+        }
+        return false;
+    }
+    private bool CheckForFood()
+    {
+        if (currentRoom.objectsInRoom.Count > 0)
+        {
+            nextState.Enqueue(MonsterState.Eating);
+            currentSpeed = chaseSpeed;
+            SetTargetPoint(currentRoom.objectsInRoom[0].transform.position);
+            WalkToTarget();
+            return true;
+        }
+        return false;
     }
 
     public async void GoToNextRoom()
@@ -269,7 +300,17 @@ public class MonsterController : MonoBehaviour
             monsterMovement = monsterMovement.normalized;
             SetDirection(monsterMovement);
         }
-        CheckCurrentRoom();
+        CheckForPlayer();
+    }
+
+    private void Eating()
+    {
+        if (Time.time > eatingTimeEnd)
+        {
+            DestroyImmediate(currentRoom.objectsInRoom[0].gameObject);
+            currentRoom.UpdateObjects();
+            SetState(MonsterState.Patroling);
+        }
     }
 
     private async Task DestroyTargetObject()
