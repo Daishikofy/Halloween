@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="DataFile" id="{afb00a07-0286-4771-908f-9c44bf654f10}">
+		<property name="assetPath">
+			<value>SFX/Door/Door_Slams_Fast_Four_Times.mp3.meta</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{785829e4-78cc-40db-b0a8-45e324a89ea5}</destination>
+		</relationship>
+	</object>
+</objects>

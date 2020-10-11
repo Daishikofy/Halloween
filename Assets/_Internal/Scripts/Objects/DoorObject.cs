@@ -12,6 +12,14 @@ public class DoorObject : MonoBehaviour, IInteractable
     public bool isLocked;
     public string objectToUnlock;
 
+    [Header("SFX")]
+    public string openDoorSFX;
+    public string closeDoorSFX;
+
+    [Header("Animations")]
+    public string openDoorAnim;
+    public string closeDoorAnim;
+
     [Header("Run time variables")]
     public bool isBlocked;
     public List<DestroyableObject> destroyableObjects;
@@ -140,12 +148,12 @@ public class DoorObject : MonoBehaviour, IInteractable
     {
         if (doorUsers > 0) return;
             //Animation
-        FMODUnity.RuntimeManager.PlayOneShot("event:/PlaceHolders/OpenDoor", transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(openDoorSFX, transform.position);
     }
     private void CloseDoorVisuals()
     {
         //Animation
-        FMODUnity.RuntimeManager.PlayOneShot("event:/PlaceHolders/CloseDoor", transform.position);
+        FMODUnity.RuntimeManager.PlayOneShot(closeDoorSFX, transform.position);
     }
 
     public bool IsAdjacent(int roomId)

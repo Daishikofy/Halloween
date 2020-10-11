@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="DataFile" id="{622fe615-0a3f-4ad8-9fcc-6c94b6e1c0e7}">
+		<property name="assetPath">
+			<value>SFX/Door/Wood_Door_Creak_Open.mp3.meta</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{785829e4-78cc-40db-b0a8-45e324a89ea5}</destination>
+		</relationship>
+	</object>
+</objects>

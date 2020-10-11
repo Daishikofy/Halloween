@@ -103,6 +103,10 @@ MonoBehaviour:
   - {fileID: 5068634807106312999}
   isLocked: 0
   objectToUnlock: 
+  openDoorSFX: event:/Ambient/OpenDoor
+  closeDoorSFX: event:/Ambient/CloseDoor
+  openDoorAnim: 
+  closeDoorAnim: 
   isBlocked: 0
   destroyableObjects: []
 --- !u!61 &1086728296564857651
