@@ -281,7 +281,7 @@ public class MonsterController : MonoBehaviour
                 targetObject.Damaged();
             }
         else
-            while (targetObject.lifePoints > 0)
+            while (targetObject.lifePoints > 0 && !currentRoom.isPlayerInRoom)
             {
                 Debug.Log("targetObject.lifePoints: " + targetObject.lifePoints);
                 await Task.Delay((int)(attackRate * 1000));

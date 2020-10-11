@@ -97,7 +97,8 @@ public class DoorObject : MonoBehaviour, IInteractable
         //Debug.Log("Player : Door is open");
         int index = player.currentRoom.id == frontDoors[0].room.id ? 1 : 0;
         GameController.Instance.PlayerChangesRoom(frontDoors[index].room, frontDoors[index].transform.position);
-        //TODO: Animation + sound
+
+        OpenDoorVisuals();
         doorCollider.enabled = false;
         doorUsers += 1;
         do {
@@ -105,10 +106,10 @@ public class DoorObject : MonoBehaviour, IInteractable
         } 
         while (player.automaticMovement);
 
-        //Debug.Log("Player : Door closed");
-        if(doorUsers == 1)
+        doorUsers--;
+        if(doorUsers == 0)
         {
-            doorUsers--;
+            CloseDoorVisuals();
             doorCollider.enabled = true;
         }
     }
@@ -117,7 +118,7 @@ public class DoorObject : MonoBehaviour, IInteractable
     {
         int index = monster.currentRoom.id == frontDoors[0].room.id ? 1 : 0;
         GameController.Instance.MonsterChangesRoom(monster.id,frontDoors[index].room, frontDoors[index].transform.position);
-        //TODO: Animation + sound
+        OpenDoorVisuals();
         doorUsers += 1;
         doorCollider.enabled = false;
         //Debug.Log("Monster : Door open");
@@ -126,13 +127,27 @@ public class DoorObject : MonoBehaviour, IInteractable
         }
         while (monster.state == MonsterState.ChangingRoom);
 
-        //.Log("Monster : Door closed");
-        doorCollider.enabled = true;
         doorUsers--;
-        if (doorUsers == 0)  
+        if (doorUsers == 0)
+        {
+            CloseDoorVisuals();
             doorCollider.enabled = true;
+        }
         
     }
+
+    private void OpenDoorVisuals()
+    {
+        if (doorUsers > 0) return;
+            //Animation
+        FMODUnity.RuntimeManager.PlayOneShot("event:/PlaceHolders/OpenDoor", transform.position);
+    }
+    private void CloseDoorVisuals()
+    {
+        //Animation
+        FMODUnity.RuntimeManager.PlayOneShot("event:/PlaceHolders/CloseDoor", transform.position);
+    }
+
     public bool IsAdjacent(int roomId)
     {
         if (roomId == frontDoors[0].room.id)

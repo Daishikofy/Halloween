@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="DataFile" id="{36e5784c-1e71-48b4-9688-6d3f0e0096fe}">
+		<property name="assetPath">
+			<value>Pinata/sfx_pinata_boing_3.ogg.meta</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{785829e4-78cc-40db-b0a8-45e324a89ea5}</destination>
+		</relationship>
+	</object>
+</objects>

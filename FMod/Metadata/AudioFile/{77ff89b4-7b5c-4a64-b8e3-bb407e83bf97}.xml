@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.00.00">
+	<object class="AudioFile" id="{77ff89b4-7b5c-4a64-b8e3-bb407e83bf97}">
+		<property name="assetPath">
+			<value>Pinata/sfx_pinata_boing_4.ogg</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>48</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>0.25447916666666665</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{785829e4-78cc-40db-b0a8-45e324a89ea5}</destination>
+		</relationship>
+	</object>
+</objects>
