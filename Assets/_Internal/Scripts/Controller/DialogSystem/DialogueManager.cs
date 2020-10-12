@@ -16,14 +16,12 @@ public class DialogueManager : MonoBehaviour
     [SerializeField]
     private float animationSpeed = 3;
     [SerializeField]
-    private float closedPosition;
+    private float closedPosition = -100;
     [SerializeField]
-    private float openedPosition;
+    private float openedPosition = 0;
     [Header("ObjectSetup")]
     [SerializeField]
     private GameObject dialogueBox = null;
-    [SerializeField]
-    private Button button = null;
 
     [Header("Runtime Variables")]
     [SerializeField]

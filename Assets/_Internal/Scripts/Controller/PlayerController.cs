@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using System;
 using Unity.Mathematics;
-using Unity.Mathematics;
 
 [Serializable]
 public enum PlayerMovement
@@ -207,7 +206,7 @@ public class PlayerController : MonoBehaviour {
             //TODO: Animations drop candy
             var index = UnityEngine.Random.Range(0, candyPrefabs.Length);
             var obj = Instantiate(candyPrefabs[index], transform.position, quaternion.identity);
-            currentRoom.objectsInRoom.Add(obj);
+            currentRoom.objectsInRoom.Enqueue(obj);
         }
     }
 

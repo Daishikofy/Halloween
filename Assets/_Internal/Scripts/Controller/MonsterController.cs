@@ -55,6 +55,7 @@ public class MonsterController : MonoBehaviour
 
     private DoorObject targetDoor;
     private DestroyableObject targetObject;
+    private GameObject eatingObject;
 
     private float breakTimeEnd;
     private float patrolCycleEnd;
@@ -201,7 +202,8 @@ public class MonsterController : MonoBehaviour
         {
             nextState.Enqueue(MonsterState.Eating);
             currentSpeed = chaseSpeed;
-            SetTargetPoint(currentRoom.objectsInRoom[0].transform.position);
+            eatingObject = currentRoom.objectsInRoom.Dequeue();
+            SetTargetPoint(eatingObject.transform.position);
             WalkToTarget();
             return true;
         }
@@ -289,6 +291,7 @@ public class MonsterController : MonoBehaviour
 
         if (Vector2.Distance(transform.position, targetPoint) < 0.1f)
         {
+            CheckForPlayer();
             targetPoint = NewRandomTargetPoint();
             breakTimeEnd = Time.time + breakTime;
             monsterMovement = Vector2.zero;
@@ -300,15 +303,13 @@ public class MonsterController : MonoBehaviour
             monsterMovement = monsterMovement.normalized;
             SetDirection(monsterMovement);
         }
-        CheckForPlayer();
     }
 
     private void Eating()
     {
         if (Time.time > eatingTimeEnd)
         {
-            DestroyImmediate(currentRoom.objectsInRoom[0].gameObject);
-            currentRoom.UpdateObjects();
+            Destroy(eatingObject);
             SetState(MonsterState.Patroling);
         }
     }
