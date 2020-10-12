@@ -75,6 +75,9 @@ crashlytics-build.properties
 /Assets/FMODStudioCache.asset
 /Assets/FMODStudioCache.asset.meta
 fmod.log
+Assets/Plugins/FMOD/Cache/
+Assets/StreamingAssets/**/*.bank
+Assets/StreamingAssets/**/*.bank.meta
 fmod_editor.log
 
 # FMOD studio (In folder FMOD)
@@ -82,3 +85,4 @@ fmod_editor.log
 /FMOD/**.unsaved
 /FMOD/**.cache
 /FMOD/**.restore
+
