@@ -4,8 +4,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [Serializable]
-public enum collectibleType
+public enum CollectibleType
 {
+    None,
     SmallKey,
     BigKey,
     Candy
@@ -13,7 +14,7 @@ public enum collectibleType
 
 public class CollectibleObject : MonoBehaviour, IInteractable
 {
-    public collectibleType type;
+    public CollectibleType type;
     public bool OnInteraction(PlayerController player)
     {
         player.CollectItem(type.ToString());

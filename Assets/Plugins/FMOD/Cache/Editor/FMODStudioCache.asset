@@ -16,7 +16,7 @@ MonoBehaviour:
   guid: 0cf3664f205610459541c0623ff25a8b
   Banks:
   - {fileID: -4165777459235673836}
-  - {fileID: -1337511894924432938}
+  - {fileID: 3427012753340966895}
   IsStream: 0
   Is3D: 1
   IsOneShot: 0
@@ -38,7 +38,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Path: FMod/Build/Desktop/Master.strings.bank
   SubDir: 
-  lastModified: 637381003308656838
+  lastModified: 637380416113361400
   LoadResult: 0
   FileSizes:
   - Name: Desktop
@@ -96,7 +96,7 @@ MonoBehaviour:
   guid: 0a80ec7c1cccf548b7c05c8063b6c3be
   Banks:
   - {fileID: -4165777459235673836}
-  - {fileID: -1337511894924432938}
+  - {fileID: 3427012753340966895}
   IsStream: 0
   Is3D: 1
   IsOneShot: 1
@@ -120,7 +120,7 @@ MonoBehaviour:
   guid: 424c0368a776304782ee7448cdd24fb9
   Banks:
   - {fileID: -4165777459235673836}
-  - {fileID: -1337511894924432938}
+  - {fileID: 3427012753340966895}
   IsStream: 1
   Is3D: 1
   IsOneShot: 1
@@ -179,7 +179,7 @@ MonoBehaviour:
   Path: event:/PlaceHolders/CollectCandy
   guid: e93a4c99e8cd944cb2683c83ec6f1715
   Banks:
-  - {fileID: -1337511894924432938}
+  - {fileID: 3427012753340966895}
   IsStream: 0
   Is3D: 0
   IsOneShot: 1
@@ -278,7 +278,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   EditorBanks:
   - {fileID: -7818236234310580612}
-  - {fileID: -1337511894924432938}
+  - {fileID: 3427012753340966895}
   EditorEvents:
   - {fileID: -3865401647187732606}
   - {fileID: -6919974388737854502}
@@ -286,10 +286,10 @@ MonoBehaviour:
   - {fileID: -9199017121511440488}
   EditorParameters: []
   MasterBanks:
-  - {fileID: -1337511894924432938}
+  - {fileID: 3427012753340966895}
   StringsBanks:
   - {fileID: -7818236234310580612}
-  stringsBankWriteTime: 637381003308656838
+  stringsBankWriteTime: 637380416113361400
   cacheVersion: 3
 --- !u!114 &42043759074541845
 MonoBehaviour:
@@ -372,6 +372,24 @@ MonoBehaviour:
   MinDistance: 0
   MaxDistance: 0
   Length: 950
+--- !u!114 &3427012753340966895
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c18180ecb35941f4682ae60107b85b7c, type: 3}
+  m_Name: bank:/Master.bank
+  m_EditorClassIdentifier: 
+  Path: FMod/Build/Desktop/Master.bank
+  SubDir: 
+  lastModified: 637380416113341421
+  LoadResult: 0
+  FileSizes: []
+  Exists: 1
 --- !u!114 &5061381580450566782
 MonoBehaviour:
   m_ObjectHideFlags: 0

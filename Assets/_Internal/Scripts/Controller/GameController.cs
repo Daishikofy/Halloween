@@ -66,6 +66,28 @@ public class GameController : MonoBehaviour
         cameraController.GoTo(newRoom.type, newRoom.cameraMin.position, newRoom.cameraMax.position);
     }
 
+    public void BlockPlayer(bool value)
+    {
+        if (value)
+            player.SetMovement(PlayerMovement.None);
+        else
+            player.SetMovement(PlayerMovement.Continuous);
+    }
+
+    public void PlayerEarnsItems(CollectibleType item,int quantity)
+    {
+        player.inventory.GetObject(item.ToString(), quantity);
+    }
+
+    public void PlayerMissedPuzzle()
+    {
+        foreach (var monster in monsters)
+        {
+            if (monster.currentRoom.isAdjacent(player.currentRoom.id))
+                MonsterFollowsPlayer(monster.id);
+        }
+    }
+
     public void MonsterChangesRoom(int monsterId, RoomObject newRoom, Vector2 frontDoorPosition)
     {
         monsters[monsterId].currentRoom.isMonsterInRoom = true;

@@ -88,11 +88,11 @@ public class DialogueManager : MonoBehaviour
         }   
     }
 
-    private void endDialogue()
+    private async void endDialogue()
     {
+        await CloseDialogBox();
         endedDialogue.Invoke();
-        EventSystem.current.SetSelectedGameObject(null);
-        CloseDialogBox();
+        EventSystem.current.SetSelectedGameObject(null);        
     }
 
     private void OpenDialogBox()
@@ -101,10 +101,11 @@ public class DialogueManager : MonoBehaviour
             , openedPosition
             , 1 / animationSpeed).setEase(LeanTweenType.easeInOutBack);
     }
-    private void CloseDialogBox()
+    private async Task CloseDialogBox()
     {
         LeanTween.moveY(dialogueBox
     , closedPosition
     , 1 / animationSpeed).setEase(LeanTweenType.easeInOutBack);
+        await Task.Delay((int)(1000 / animationSpeed));
     }
 }

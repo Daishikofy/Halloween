@@ -4,8 +4,11 @@ using UnityEngine;
 
 public class HidingObject : DestroyableObject, IInteractable
 {
+    public bool isLocked;
     public bool OnInteraction(PlayerController player)
     {
+        if (isLocked) 
+            return false;
         player.Hides();
         destroyed.AddListener(player.Unhides);
         return true;

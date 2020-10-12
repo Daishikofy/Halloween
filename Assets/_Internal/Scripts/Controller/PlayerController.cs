@@ -201,7 +201,7 @@ public class PlayerController : MonoBehaviour {
 
     private void DropCandy()
     {
-        if (inventory.UseObject(collectibleType.Candy.ToString()))
+        if (inventory.UseObject(CollectibleType.Candy.ToString()))
         {
             //TODO: Animations drop candy
             var index = UnityEngine.Random.Range(0, candyPrefabs.Length);
