@@ -17,7 +17,7 @@ public class CollectibleObject : MonoBehaviour, IInteractable
     public CollectibleType type;
     public bool OnInteraction(PlayerController player)
     {
-        player.CollectItem(type.ToString());
+        player.CollectItem(this);
         Destroy(this.gameObject);
         return true;
     }

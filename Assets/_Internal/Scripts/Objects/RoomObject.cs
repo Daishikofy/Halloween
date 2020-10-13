@@ -82,8 +82,8 @@ public class RoomObject : MonoBehaviour
         return rooms;
     }
 
-    public void UpdateObjects()
+    public void RemoveItem(CollectibleObject item)
     {
-        objectsInRoom = new Queue<GameObject>(objectsInRoom.Where(x => x != null));
+        objectsInRoom = new Queue<GameObject>(objectsInRoom.Where(x => x != item.gameObject));
     }
 }

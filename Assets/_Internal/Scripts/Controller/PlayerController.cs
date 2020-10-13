@@ -192,11 +192,11 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
-    public void CollectItem(string itemName)
+    public void CollectItem(CollectibleObject item)
     {
         //TODO: Animations
-        inventory.GetObject(itemName, 1);
-        currentRoom.UpdateObjects();
+        inventory.GetObject(item.name, 1);
+        currentRoom.RemoveItem(item);
     }
 
     private void DropCandy()
