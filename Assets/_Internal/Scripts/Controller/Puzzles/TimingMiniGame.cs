@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 public class TimingMiniGame : MiniGame
 {
@@ -10,12 +11,15 @@ public class TimingMiniGame : MiniGame
     public float trajectoryDuration;
     public LeanTweenType knobTweenType;
 
-
-    protected override void StartMiniGame()
+    protected override void InitializeMiniGame()
     {
         var aux = movingPart.transform.localPosition;
         aux.x = leftPosition;
-        movingPart.transform.localPosition = aux;
+        movingPart.transform.localPosition = aux; 
+    }
+
+    protected override void StartMiniGame()
+    {
         movingPart.LeanMoveLocalX(rightPosition, trajectoryDuration).setEase(knobTweenType).setLoopPingPong();
         base.StartMiniGame();
     }
@@ -30,7 +34,7 @@ public class TimingMiniGame : MiniGame
             else
                 succes = false;
             movingPart.LeanCancel();
-            EndMiniGame();
+            StartCoroutine(EndMiniGame());
         }
     }
 }

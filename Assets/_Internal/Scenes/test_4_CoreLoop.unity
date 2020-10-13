@@ -1957,10 +1957,14 @@ MonoBehaviour:
   onMissedSFX: event:/Ambient/CloseDoor
   item: 3
   quantity: 2
-  dialogue:
+  itemFound:
     name: Desk
     sentences:
-    - You found 2 candies
+    - You found a candy
+  nothingInHere:
+    name: Desk
+    sentences:
+    - You already took all the candies
 --- !u!1 &772178859
 GameObject:
   m_ObjectHideFlags: 0

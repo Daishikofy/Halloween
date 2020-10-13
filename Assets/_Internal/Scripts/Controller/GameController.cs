@@ -83,7 +83,7 @@ public class GameController : MonoBehaviour
     {
         foreach (var monster in monsters)
         {
-            if (monster.currentRoom.isAdjacent(player.currentRoom.id))
+            if (monster.currentRoom.isAdjacent(player.currentRoom.id) && monster.currentRoom != player.currentRoom)
                 MonsterFollowsPlayer(monster.id);
         }
     }
