@@ -3455,6 +3455,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Ennemy
       objectReference: {fileID: 0}
+    - target: {fileID: 7540030431428036858, guid: 00b7c1d32c9feb949b730ec02f6b6878,
+        type: 3}
+      propertyPath: StopEvent
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 00b7c1d32c9feb949b730ec02f6b6878, type: 3}
 --- !u!4 &1627238174 stripped
