@@ -1,17 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.00.00">
-	<object class="AudioFile" id="{2e6c7638-d6a8-4177-862f-3cb313239eb4}">
+	<object class="AudioFile" id="{434f609d-6be3-4bc9-a2c5-4fc8aafbc053}">
 		<property name="assetPath">
-			<value>SFX/Ambient/heartbeat.wav</value>
+			<value>SFX/Ambient/Ambient_Breath_01.ogg</value>
+		</property>
+		<property name="isStreaming">
+			<value>true</value>
 		</property>
 		<property name="frequencyInKHz">
-			<value>44.0999985</value>
+			<value>48</value>
 		</property>
 		<property name="channelCount">
-			<value>1</value>
+			<value>2</value>
 		</property>
 		<property name="length">
-			<value>1.9359637188208616</value>
+			<value>10.103270833333333</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{785829e4-78cc-40db-b0a8-45e324a89ea5}</destination>

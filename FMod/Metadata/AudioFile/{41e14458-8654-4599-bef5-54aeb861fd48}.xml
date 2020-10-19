@@ -1,20 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.00.00">
-	<object class="AudioFile" id="{bddb58ec-9bc7-4b6b-b2f0-9c33a96fb728}">
+	<object class="AudioFile" id="{41e14458-8654-4599-bef5-54aeb861fd48}">
 		<property name="assetPath">
-			<value>SFX/Ambient/Hallow_Wind.mp3</value>
-		</property>
-		<property name="isStreaming">
-			<value>true</value>
+			<value>SFX/Ambient/Ambient_Breath_02.ogg</value>
 		</property>
 		<property name="frequencyInKHz">
-			<value>44.0999985</value>
+			<value>48</value>
 		</property>
 		<property name="channelCount">
 			<value>2</value>
 		</property>
 		<property name="length">
-			<value>35.213061224489799</value>
+			<value>3.4157083333333333</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{785829e4-78cc-40db-b0a8-45e324a89ea5}</destination>

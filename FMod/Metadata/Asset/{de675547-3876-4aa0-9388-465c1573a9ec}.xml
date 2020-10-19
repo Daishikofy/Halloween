@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <objects serializationModel="Studio.02.00.00">
-	<object class="DataFile" id="{246c6308-d354-4282-a7c0-f0eca584a10a}">
+	<object class="EncodableAsset" id="{de675547-3876-4aa0-9388-465c1573a9ec}">
 		<property name="assetPath">
-			<value>SFX/Ambient/heartbeat.wav.meta</value>
+			<value>SFX/Ambient/</value>
 		</property>
 		<relationship name="masterAssetFolder">
 			<destination>{785829e4-78cc-40db-b0a8-45e324a89ea5}</destination>

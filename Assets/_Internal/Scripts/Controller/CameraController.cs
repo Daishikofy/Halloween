@@ -24,7 +24,7 @@ public class CameraController : MonoBehaviour
     public float maxPosition;
 
     private Vector3 cameraMovement;
-    private Vector2 targetPoint;
+    //private Vector2 targetPoint;
     private float distance;
     private Action currentMovement;
     // Start is called before the first frame update
@@ -73,6 +73,7 @@ public class CameraController : MonoBehaviour
         switch (movement)
         {
             case CameraMovement.Fixed:
+                cameraMovement = transform.position;
                 currentMovement = () => FixedMovement();
                 break;
             case CameraMovement.Horizontal:
@@ -88,7 +89,7 @@ public class CameraController : MonoBehaviour
 
     public async void GoTo(CameraMovement movimentation, Vector2 min, Vector2 max)
     {
-        targetPoint = Utils.NearestPointOnSegment(transform.position, min, max);        
+        var targetPoint = Utils.NearestPointOnSegment(transform.position, min, max);        
 
         cameraMovimentation = movimentation;
         Vector2 startPoint = transform.position;
@@ -98,9 +99,11 @@ public class CameraController : MonoBehaviour
 
         float time = distance / transitionSpeed;
         transform.LeanMove(targetPoint, time);
-        await Task.Delay((int)time*1000);
+
         SetupMinMax(min, max);
         SetMovement(cameraMovimentation);
+
+        await Task.Delay((int)time*1000);
     }
 
     private void SetupMinMax(Vector2 min, Vector2 max)
@@ -111,7 +114,7 @@ public class CameraController : MonoBehaviour
             minPosition = min.x;
             maxPosition = max.x;
         }
-        else
+        else if (cameraMovimentation == CameraMovement.Vertical)
         {
             cameraMovement.x = min.x;
             minPosition = min.y;

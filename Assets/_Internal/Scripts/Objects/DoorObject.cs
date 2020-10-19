@@ -10,7 +10,7 @@ public class DoorObject : MonoBehaviour, IInteractable
     public FrontDoorObject[] frontDoors;
 
     public bool isLocked;
-    public string objectToUnlock;
+    public CollectibleType objectToUnlock;
 
     [Header("SFX")]
     public string openDoorSFX;
@@ -57,7 +57,7 @@ public class DoorObject : MonoBehaviour, IInteractable
         else if (isLocked)
         {
             Debug.Log("Door is locked");
-            if (player.inventory.UseObject(objectToUnlock))
+            if (player.inventory.UseObject(objectToUnlock.ToString()))
             {
                 Debug.Log("You unlocked the door");
                 isLocked = false;
