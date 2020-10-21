@@ -188,20 +188,20 @@ public class GameController : MonoBehaviour
     {
         PlayerProperties.Instance.inventory = player.inventory;
         PlayerProperties.Instance.scene = SceneManager.GetActiveScene().name;
-        PlayerProperties.Instance.SaveIntoJson();
+        PlayerProperties.Instance.Save();
     }
 
     public void LoadGame()
     {
         if (PlayerProperties.Instance.wasChanged)
-            if (!PlayerProperties.Instance.LoadFromJson()) return;
+            if (!PlayerProperties.Instance.Load()) return;
         player.inventory = PlayerProperties.Instance.inventory;
     }
 
     public void ReloadLastSave()
     {
         if (!PlayerProperties.Instance.wasChanged)
-            if (!PlayerProperties.Instance.LoadFromJson()) return;
+            if (!PlayerProperties.Instance.Load()) return;
         var scene = PlayerProperties.Instance.scene = SceneManager.GetActiveScene().name;
         SceneManager.LoadScene(scene);
     }

@@ -44,14 +44,19 @@ public class PlayerProperties : MonoBehaviour
         DontDestroyOnLoad(this.gameObject);
     }
 
-    public void SaveIntoJson()
+    public void ClearData()
+    {
+        System.IO.File.Delete(Application.persistentDataPath + "/Data.json");
+    }
+
+    public void Save()
     {
         string data = JsonUtility.ToJson(playerData);
         System.IO.File.WriteAllText(Application.persistentDataPath + "/Data.json", data);
         wasChanged = false;
     }
 
-    public bool LoadFromJson()
+    public bool Load()
     {
         if (!System.IO.File.Exists(Application.persistentDataPath + "/Data.json"))
             return false;
