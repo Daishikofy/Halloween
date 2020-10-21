@@ -2,7 +2,7 @@
 <objects serializationModel="Studio.02.00.00">
 	<object class="Event" id="{68034c42-76a7-4730-82ee-7448cdd24fb9}">
 		<property name="name">
-			<value>CloseDoor</value>
+			<value>Ambient_CloseDoor</value>
 		</property>
 		<property name="outputFormat">
 			<value>2</value>
@@ -90,10 +90,10 @@
 	<object class="MixerBusPanner" id="{944dbf5e-10d9-47d4-a7bd-32025c377bab}" />
 	<object class="SingleSound" id="{3a96359c-b842-4047-98d7-02afb5a73c4e}">
 		<property name="length">
-			<value>0.68000000000000005</value>
+			<value>0.66400000000000003</value>
 		</property>
 		<property name="timelockedOffset">
-			<value>1.8400000000000003</value>
+			<value>1.8560000000000003</value>
 		</property>
 		<relationship name="audioFile">
 			<destination>{ef928a45-6ee5-4335-9063-7667d7ff7fb7}</destination>

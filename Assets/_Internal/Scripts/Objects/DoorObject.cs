@@ -1,5 +1,4 @@
-﻿using MyBox;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -57,7 +56,7 @@ public class DoorObject : MonoBehaviour, IInteractable
         else if (isLocked)
         {
             Debug.Log("Door is locked");
-            if (player.inventory.UseObject(objectToUnlock.ToString()))
+            if (player.inventory.UseObject(objectToUnlock))
             {
                 Debug.Log("You unlocked the door");
                 isLocked = false;

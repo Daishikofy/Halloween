@@ -12,9 +12,13 @@ public class GameController : MonoBehaviour
     public PlayerController player;
     public MonsterController[] monsters;
     public RoomObject[] rooms;
+    [Scene]
+    public string nextScene;
     [Header("Object Setup")]
     public GameUIController ui;
     public CameraController cameraController;
+
+    private string currentScene;
 
     private void Awake()
     {
@@ -76,7 +80,7 @@ public class GameController : MonoBehaviour
 
     public void PlayerEarnsItems(CollectibleType item,int quantity)
     {
-        player.inventory.GetObject(item.ToString(), quantity);
+        player.inventory.GetObject(item, quantity);
     }
 
     public void PlayerMissedPuzzle()
@@ -171,7 +175,12 @@ public class GameController : MonoBehaviour
     public void OnPlayerWin()
     {
         ui.OnGameEnded(true);
+        currentScene = nextScene;
         SaveGame();
+        if (nextScene != "")
+            SceneManager.LoadScene(nextScene);
+        else
+            SceneManager.LoadScene(0);
     }
 
     public void OnPlayerLose()
@@ -187,7 +196,7 @@ public class GameController : MonoBehaviour
     public void SaveGame()
     {
         PlayerProperties.Instance.inventory = player.inventory;
-        PlayerProperties.Instance.scene = SceneManager.GetActiveScene().name;
+        PlayerProperties.Instance.scene = currentScene;
         PlayerProperties.Instance.Save();
     }
 
@@ -196,6 +205,8 @@ public class GameController : MonoBehaviour
         if (PlayerProperties.Instance.wasChanged)
             if (!PlayerProperties.Instance.Load()) return;
         player.inventory = PlayerProperties.Instance.inventory;
+        currentScene = PlayerProperties.Instance.scene;
+        Debug.Log("player.inventory.candy: " + player.inventory.inventory["Candy"]);
     }
 
     public void ReloadLastSave()

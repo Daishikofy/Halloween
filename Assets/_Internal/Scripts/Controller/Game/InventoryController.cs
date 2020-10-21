@@ -12,10 +12,10 @@ public class InventoryController
         inventory = new Dictionary<string, int>();
     }
 
-    public void GetObject(string name, int quantity)
+    public void GetObject(CollectibleType item, int quantity)
     {
         int value = 0;
-
+        var name = item.ToString();
         if (inventory.TryGetValue(name, out value))
         {
             inventory.Remove(name);
@@ -23,10 +23,10 @@ public class InventoryController
         inventory.Add(name, value + quantity);        
     }
 
-    public bool UseObject(string name)
+    public bool UseObject(CollectibleType item)
     {
         int value = 0;
-
+        var name = item.ToString();
         if (inventory.TryGetValue(name, out value))
         {
             if (value > 0)

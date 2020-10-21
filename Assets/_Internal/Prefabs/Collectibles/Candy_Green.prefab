@@ -62,12 +62,32 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2482165382528164991, guid: fb9f2c2f0786c2e4fac06031e116d583,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482165382528164991, guid: fb9f2c2f0786c2e4fac06031e116d583,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.x
+      value: 0.53125
+      objectReference: {fileID: 0}
+    - target: {fileID: 2482165382528164991, guid: fb9f2c2f0786c2e4fac06031e116d583,
+        type: 3}
+      propertyPath: m_SpriteTilingProperty.oldSize.y
+      value: 0.21875
+      objectReference: {fileID: 0}
     - target: {fileID: 3706346434837653941, guid: fb9f2c2f0786c2e4fac06031e116d583,
         type: 3}
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: -3841001674730881611, guid: dfe50fea536a6614e81efd0ba2883e17,
         type: 3}
+    - target: {fileID: 3706346434837653941, guid: fb9f2c2f0786c2e4fac06031e116d583,
+        type: 3}
+      propertyPath: m_RenderingLayerMask
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7310983554538764880, guid: fb9f2c2f0786c2e4fac06031e116d583,
         type: 3}
       propertyPath: m_Name

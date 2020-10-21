@@ -36,6 +36,7 @@ public class CameraController : MonoBehaviour
 
     public void Setup(CameraMovement movement, Vector2 min, Vector2 max)
     {
+        Debug.Log("Setup: " + movement.ToString());
         cameraMovimentation = movement;
         SetupMinMax(min, max);
         var aux = Utils.NearestPointOnSegment(transform.position, min, max);

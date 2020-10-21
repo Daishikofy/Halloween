@@ -59,7 +59,8 @@ public class PlayerController : MonoBehaviour {
         joint.connectedBody = null;
         joint.enabled = false;
 
-        inventory = new InventoryController();
+        if (inventory == null)
+            inventory = new InventoryController();
         currentStamina = stamina;
     }
 	
@@ -221,13 +222,13 @@ public class PlayerController : MonoBehaviour {
     public void CollectItem(CollectibleObject item)
     {
         //TODO: Animations
-        inventory.GetObject(item.name, 1);
+        inventory.GetObject(item.type, 1);
         currentRoom.RemoveItem(item);
     }
 
     private void DropCandy()
     {
-        if (inventory.UseObject(CollectibleType.Candy.ToString()))
+        if (inventory.UseObject(CollectibleType.Candy))
         {
             //TODO: Animations drop candy
             var index = UnityEngine.Random.Range(0, candyPrefabs.Length);

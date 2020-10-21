@@ -5,12 +5,8 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuController : MonoBehaviour
 {
-    [SerializeField]
-    private string firstGameScene = "";
-    void Start()
-    {
-        
-    }
+    [Scene]
+    public string firstGameScene;
 
     public void LoadGame()
     {

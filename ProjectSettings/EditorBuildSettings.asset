@@ -4,5 +4,11 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/_Internal/Scenes/MainMenu.unity
+    guid: 18178dd170ab66f4fa7405dd18b184ca
+  - enabled: 1
+    path: Assets/_Internal/Scenes/Level1_AbandonedFactory.unity
+    guid: 9a48a55354c607d4a9b90108d2c9a3c7
   m_configObjects: {}
