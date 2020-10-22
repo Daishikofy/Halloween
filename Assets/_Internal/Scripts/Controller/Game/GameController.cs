@@ -38,11 +38,16 @@ public class GameController : MonoBehaviour
         }
 
         ui.onRestart.AddListener(RestartGame);
+
+
+        var currentRoom = player.currentRoom;
+        cameraController.Setup(currentRoom.type
+            , currentRoom.cameraMin.position
+            , currentRoom.cameraMax.position);
     }
 
     private void Start()
-    {
-        
+    {      
         foreach (var room in rooms)
         {
             if (player.currentRoom.id == room.id)
@@ -51,11 +56,6 @@ public class GameController : MonoBehaviour
                 break;
             }
         }
-        
-        var currentRoom = player.currentRoom;
-        cameraController.Setup(currentRoom.type
-            , currentRoom.cameraMin.position
-            , currentRoom.cameraMax.position);
 
         LoadGame();
     }

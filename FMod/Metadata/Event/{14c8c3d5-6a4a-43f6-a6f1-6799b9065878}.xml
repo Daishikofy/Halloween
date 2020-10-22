@@ -34,6 +34,9 @@
 		<relationship name="parameters">
 			<destination>{007831be-c3b7-4c2c-8626-e0a06eb6d812}</destination>
 		</relationship>
+		<relationship name="banks">
+			<destination>{7e133b1d-af79-4c21-841b-4f90de2ccc0e}</destination>
+		</relationship>
 	</object>
 	<object class="EventMixer" id="{0d27be3f-304b-4abd-a673-884d026764ca}">
 		<relationship name="masterBus">
@@ -138,7 +141,6 @@
 		<property name="timelockedOffset">
 			<value>34</value>
 		</property>
-		<property name="name" />
 		<relationship name="triggerConditions">
 			<destination>{39aba30b-5edd-4b67-bfcd-2f39feaf37b1}</destination>
 		</relationship>
@@ -208,7 +210,6 @@
 		<property name="length">
 			<value>31</value>
 		</property>
-		<property name="name" />
 		<relationship name="timeline">
 			<destination>{5832fb33-82bb-445a-8afd-0ec10a228250}</destination>
 		</relationship>
